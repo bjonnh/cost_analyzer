@@ -1,17 +1,19 @@
 """Main entry point for Claude Code Cost Analyzer."""
 
 import webbrowser
+import time
+import logging
 from datetime import datetime, timedelta
 from typing import Tuple, Optional, List, Dict, Any
 import json
 
 import dash
-from dash import Input, Output, State, html
+from dash import Input, Output, State, html, dcc
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.graph_objects as go
 
-from .data_processor import refresh_and_load_data, calculate_statistics
+from .data_processor import refresh_and_load_data, calculate_statistics, get_window_analysis
 from .predictions import predict_future_costs
 from .visualizations import create_additional_charts, create_token_charts
 from .dashboard import (
@@ -20,6 +22,21 @@ from .dashboard import (
     INDEX_STRING
 )
 
+# Set up performance logging
+performance_logger = logging.getLogger('performance')
+performance_logger.setLevel(logging.INFO)
+if not performance_logger.handlers:
+    handler = logging.FileHandler('performance.log')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    performance_logger.addHandler(handler)
+
+def log_timing(operation_name: str, start_time: float, **kwargs) -> None:
+    """Log timing information for performance analysis."""
+    duration = time.time() - start_time
+    extra_info = ' '.join([f"{k}={v}" for k, v in kwargs.items()]) if kwargs else ''
+    performance_logger.info(f"{operation_name}: {duration:.4f}s {extra_info}")
+
 
 def create_app() -> dash.Dash:
     """Create and configure the Dash application.
@@ -27,18 +44,28 @@ def create_app() -> dash.Dash:
     Returns:
         dash.Dash: Configured Dash application
     """
+    start_app = time.time()
+    performance_logger.info("Starting create_app()")
+    
     # Initialize the Dash app with Bootstrap theme
+    start_dash = time.time()
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+    log_timing("Dash initialization", start_dash)
     
     # Set custom index string
     app.index_string = INDEX_STRING
     
     # Set layout
+    start_layout = time.time()
     app.layout = create_layout()
+    log_timing("Layout creation", start_layout)
     
     # Register callbacks
+    start_callbacks = time.time()
     register_callbacks(app)
+    log_timing("Callback registration", start_callbacks)
     
+    log_timing("Total create_app()", start_app)
     return app
 
 
@@ -97,18 +124,24 @@ def register_callbacks(app: dash.Dash) -> None:
          Output('full-data-store', 'data'),
          Output('date-range-picker', 'min_date_allowed'),
          Output('date-range-picker', 'max_date_allowed'),
-         Output('token-data-store', 'data')],
+         Output('token-data-store', 'data'),
+         Output('window-data-store', 'data')],
         [Input('refresh-button', 'n_clicks'),
          Input('date-range-picker', 'start_date'),
          Input('date-range-picker', 'end_date')]
     )
     def update_data_stores(n_clicks, start_date, end_date):
         """Load and process all data when refresh is clicked or date range changes."""
+        start_callback = time.time()
+        performance_logger.info("Starting update_data_stores callback")
+        
         # Refresh JSONL data and load from database
+        start_refresh = time.time()
         df_full, projects, _, token_df_full = refresh_and_load_data()
+        log_timing("Data refresh in callback", start_refresh)
         
         if len(df_full) == 0:
-            return {}, {}, None, {}, "No data available", {}, None, None, {}
+            return {}, {}, None, {}, "No data available", {}, None, None, {}, {}
         
         # Store full data
         full_data = {
@@ -136,18 +169,26 @@ def register_callbacks(app: dash.Dash) -> None:
         total_cost = df.sum().sum()
         
         # Calculate statistics on filtered data
+        start_stats = time.time()
         stats = calculate_statistics(df, projects, token_df) if len(df) > 0 else {}
+        log_timing("Statistics calculation", start_stats)
         
         # Generate predictions on filtered data
+        start_predictions = time.time()
         predictions = predict_future_costs(df) if len(df) > 0 else None
+        log_timing("Predictions calculation", start_predictions)
         
         # Create additional charts with filtered data
+        start_charts = time.time()
         charts = create_additional_charts(df, projects, stats, predictions) if len(df) > 0 else {}
+        log_timing("Chart creation", start_charts)
         
         # Create token charts if token data is available
+        start_token_charts = time.time()
         if token_df is not None and len(token_df) > 0:
             token_charts = create_token_charts(token_df, projects, stats)
             charts.update(token_charts)
+        log_timing("Token chart creation", start_token_charts)
         
         # Update timestamp
         date_range_text = f" ({start_date} to {end_date})" if start_date and end_date else " (All time)"
@@ -163,10 +204,19 @@ def register_callbacks(app: dash.Dash) -> None:
         # Store token data
         token_data = token_df.to_dict() if token_df is not None else {}
         
-        # Convert charts to JSON
-        charts_json = {k: v.to_json() for k, v in charts.items()}
+        # Get window analysis
+        start_window = time.time()
+        window_data = get_window_analysis()
+        log_timing("Window analysis", start_window)
         
-        return data, stats, predictions, charts_json, last_update, full_data, min_date, max_date, token_data
+        # Convert charts to JSON
+        start_json = time.time()
+        charts_json = {k: v.to_json() for k, v in charts.items()}
+        log_timing("Chart JSON conversion", start_json, chart_count=len(charts))
+        
+        log_timing("Total update_data_stores callback", start_callback)
+        
+        return data, stats, predictions, charts_json, last_update, full_data, min_date, max_date, token_data, window_data
     
     @app.callback(
         [Output('date-range-info', 'children'),
@@ -269,9 +319,10 @@ def register_callbacks(app: dash.Dash) -> None:
          Input('data-store', 'data'),
          Input('stats-store', 'data'),
          Input('charts-store', 'data'),
-         Input('token-data-store', 'data')]
+         Input('token-data-store', 'data'),
+         Input('window-data-store', 'data')]
     )
-    def render_tab_content(active_tab, data_store, stats, charts_json, token_data_store):
+    def render_tab_content(active_tab, data_store, stats, charts_json, token_data_store, window_data_store):
         """Render content based on active tab."""
         if not data_store:
             return dbc.Alert("No data available. Click 'Refresh Data' to load.", color="warning")
@@ -298,7 +349,110 @@ def register_callbacks(app: dash.Dash) -> None:
         elif active_tab == "predictions":
             return create_prediction_content(charts_json, stats)
         
-        return dbc.div()
+        elif active_tab == "windows":
+            if not window_data_store:
+                return dbc.Alert("No window data available. Click 'Refresh Data' to load.", color="info")
+            
+            # Import the window visualization functions
+            from .visualizations import create_windows_timeline_chart_advanced, create_window_stats_chart, create_current_window_gauge
+            from .window_cards import create_window_cards
+            
+            # Create window visualizations
+            timeline_fig = create_windows_timeline_chart_advanced(window_data_store)
+            stats_fig = create_window_stats_chart(window_data_store)
+            gauge_fig = create_current_window_gauge(window_data_store)
+            
+            # Create window statistics cards
+            total_windows = window_data_store.get('total_windows', 0)
+            windows_reached_half = window_data_store.get('windows_reached_half_credit', 0)
+            avg_cost_per_window = window_data_store.get('avg_cost_per_window', 0)
+            avg_hours_to_half = window_data_store.get('avg_hours_to_half_credit', 0)
+            
+            # Create window cards
+            window_cards = create_window_cards(window_data_store)
+            
+            return html.Div([
+                # Timeline visualization at the top
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Card([
+                            dbc.CardBody([
+                                dcc.Graph(figure=timeline_fig)
+                            ])
+                        ])
+                    ], width=12)
+                ], className="mb-4"),
+                
+                # Window cards and statistics side by side
+                dbc.Row([
+                    # Left column - Window cards
+                    dbc.Col([
+                        window_cards
+                    ], width=6),
+                    
+                    # Right column - Statistics
+                    dbc.Col([
+                        # Window statistics cards
+                        dbc.Row([
+                            dbc.Col([
+                                dbc.Card([
+                                    dbc.CardBody([
+                                        html.H4("Total Windows", className="card-title"),
+                                        html.H2(str(total_windows), className="text-primary"),
+                                    ])
+                                ], className="stats-card text-white")
+                            ], width=6),
+                            dbc.Col([
+                                dbc.Card([
+                                    dbc.CardBody([
+                                        html.H4("Avg Cost/Window", className="card-title"),
+                                        html.H2(f"${avg_cost_per_window:.2f}", className="text-info"),
+                                    ])
+                                ], className="stats-card text-white")
+                            ], width=6),
+                        ], className="mb-3"),
+                        
+                        dbc.Row([
+                            dbc.Col([
+                                dbc.Card([
+                                    dbc.CardBody([
+                                        html.H4("Windows Hit ½ Credit", className="card-title"),
+                                        html.H2(f"{windows_reached_half}/{total_windows}", className="text-warning"),
+                                    ])
+                                ], className="stats-card text-white")
+                            ], width=6),
+                            dbc.Col([
+                                dbc.Card([
+                                    dbc.CardBody([
+                                        html.H4("Avg Time to ½", className="card-title"),
+                                        html.H2(f"{avg_hours_to_half:.1f}h" if avg_hours_to_half else "N/A", className="text-success"),
+                                    ])
+                                ], className="stats-card text-white")
+                            ], width=6),
+                        ], className="mb-3"),
+                        
+                        # Current window gauge
+                        dbc.Card([
+                            dbc.CardBody([
+                                dcc.Graph(figure=gauge_fig, style={'height': '300px'})
+                            ])
+                        ])
+                    ], width=6)
+                ], className="mb-4"),
+                
+                # Window statistics chart
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Card([
+                            dbc.CardBody([
+                                dcc.Graph(figure=stats_fig, style={'height': '600px'})
+                            ])
+                        ])
+                    ], width=12)
+                ])
+            ])
+        
+        return html.Div()
     
     @app.callback(
         Output('individual-model-dropdown', 'style'),
@@ -372,12 +526,17 @@ def register_callbacks(app: dash.Dash) -> None:
 
 def main():
     """Main entry point for the application."""
+    start_main = time.time()
+    performance_logger.info("Starting main() function")
+    
     app = create_app()
     
     port = 8050
     print(f"Starting Claude Code Cost Dashboard on http://localhost:{port}/")
     print("Press Ctrl+C to stop the server")
     
+    log_timing("Total startup time", start_main)
+    performance_logger.info("App startup complete, starting server")
 
     # Run the app
     app.run(debug=False, port=port)

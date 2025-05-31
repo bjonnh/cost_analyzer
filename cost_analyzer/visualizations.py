@@ -868,3 +868,649 @@ def create_token_charts(token_df: pd.DataFrame, projects: List[str],
         charts['token_by_project'] = by_project
     
     return charts
+
+
+def create_windows_timeline_chart_advanced(windows_data: Dict[str, Any]) -> go.Figure:
+    """Create an advanced timeline chart showing credit windows with bar visualization.
+    
+    Args:
+        windows_data: Window analysis data from get_window_analysis()
+        
+    Returns:
+        go.Figure: Advanced timeline chart of credit windows
+    """
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    
+    # Import the timezone function
+    from .data_processor import get_local_timezone
+    
+    windows = windows_data.get('windows', [])
+    if not windows:
+        # Return empty figure with message
+        fig = go.Figure()
+        fig.add_annotation(
+            text="No credit windows detected yet",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=20, color="gray")
+        )
+        fig.update_layout(
+            template='plotly_dark',
+            paper_bgcolor='#1a1a1a',
+            plot_bgcolor='#1a1a1a',
+            height=400
+        )
+        return fig
+    
+    # Get local timezone
+    local_tz = get_local_timezone()
+    utc_tz = ZoneInfo('UTC')
+    
+    # Convert string timestamps to datetime objects with proper timezone
+    for window in windows:
+        if isinstance(window['start_time'], str):
+            window['start_time'] = datetime.fromisoformat(window['start_time'].replace('Z', '+00:00'))
+            if window['start_time'].tzinfo is None:
+                window['start_time'] = window['start_time'].replace(tzinfo=utc_tz)
+            window['start_time'] = window['start_time'].astimezone(local_tz)
+        if isinstance(window['end_time'], str):
+            window['end_time'] = datetime.fromisoformat(window['end_time'].replace('Z', '+00:00'))
+            if window['end_time'].tzinfo is None:
+                window['end_time'] = window['end_time'].replace(tzinfo=utc_tz)
+            window['end_time'] = window['end_time'].astimezone(local_tz)
+        for msg in window.get('messages', []):
+            if isinstance(msg['timestamp'], str):
+                msg['timestamp'] = datetime.fromisoformat(msg['timestamp'].replace('Z', '+00:00'))
+                if msg['timestamp'].tzinfo is None:
+                    msg['timestamp'] = msg['timestamp'].replace(tzinfo=utc_tz)
+                msg['timestamp'] = msg['timestamp'].astimezone(local_tz)
+    
+    # Get the last 24 hours of data in local timezone
+    now = datetime.now(tz=local_tz)
+    start_24h = now - timedelta(hours=24)
+    
+    # Create figure
+    fig = go.Figure()
+    
+    # Collect all messages in the last 24 hours
+    messages_24h = []
+    for window in windows:
+        for msg in window.get('messages', []):
+            if msg['timestamp'] >= start_24h:
+                messages_24h.append(msg)
+    
+    # Sort messages by timestamp
+    messages_24h = sorted(messages_24h, key=lambda x: x['timestamp'])
+    
+    if messages_24h:
+        # Create time bins (5-minute intervals)
+        time_bins = []
+        costs_by_bin = []
+        models_by_bin = []
+        
+        # Generate 5-minute bins for the last 24 hours
+        current_time = start_24h
+        while current_time < now:
+            time_bins.append(current_time)
+            costs_by_bin.append(0)
+            models_by_bin.append(set())
+            current_time += timedelta(minutes=5)
+        
+        # Assign messages to bins
+        for msg in messages_24h:
+            # Find the appropriate bin
+            for i, bin_time in enumerate(time_bins[:-1]):
+                if bin_time <= msg['timestamp'] < time_bins[i+1]:
+                    costs_by_bin[i] += msg['cost']
+                    if 'opus' in msg.get('model', '').lower():
+                        models_by_bin[i].add('opus')
+                    elif 'sonnet' in msg.get('model', '').lower():
+                        models_by_bin[i].add('sonnet')
+                    break
+        
+        # Create bar colors based on model usage
+        colors = []
+        for models in models_by_bin:
+            if 'opus' in models and 'sonnet' in models:
+                colors.append('orange')  # Mixed
+            elif 'opus' in models:
+                colors.append('#e91e63')  # Pink for Opus
+            elif 'sonnet' in models:
+                colors.append('#2196f3')  # Blue for Sonnet
+            else:
+                colors.append('gray')
+        
+        # Create bars
+        fig.add_trace(go.Bar(
+            x=time_bins,
+            y=costs_by_bin,
+            marker_color=colors,
+            hovertemplate='%{x|%H:%M}<br>$%{y:.2f}<extra></extra>',
+            width=300000  # 5 minutes in milliseconds
+        ))
+        
+        # Add window boundaries
+        for window in windows:
+            if window['end_time'] >= start_24h:
+                # Add shaded region for window duration
+                fig.add_vrect(
+                    x0=window['start_time'],
+                    x1=window['end_time'],
+                    fillcolor="rgba(144, 238, 144, 0.1)",
+                    layer="below",
+                    line_width=0
+                )
+                
+                # Add annotation for window start
+                fig.add_annotation(
+                    x=window['start_time'],
+                    y=max(costs_by_bin) if costs_by_bin else 0,
+                    text="Window Start",
+                    showarrow=True,
+                    arrowhead=2,
+                    arrowsize=1,
+                    arrowwidth=2,
+                    arrowcolor="green",
+                    ax=0,
+                    ay=-40,
+                    font=dict(size=10, color="green")
+                )
+        
+        # Find current window and add special highlighting
+        current_window = None
+        for window in windows:
+            if window['start_time'] <= now < window['end_time']:
+                current_window = window
+                # Highlight current window
+                fig.add_vrect(
+                    x0=window['start_time'],
+                    x1=window['end_time'],
+                    fillcolor="rgba(144, 238, 144, 0.2)",
+                    layer="below",
+                    line_width=2,
+                    line_color="lightgreen"
+                )
+                break
+    
+    # Update layout
+    fig.update_layout(
+        title="Usage Timeline (Last 24 Hours)",
+        xaxis=dict(
+            title="Time",
+            tickformat="%H:%M",
+            range=[start_24h, now]
+        ),
+        yaxis=dict(
+            title="Cost ($)",
+            tickformat="$.2f"
+        ),
+        template='plotly_dark',
+        paper_bgcolor='#1a1a1a',
+        plot_bgcolor='#1a1a1a',
+        font=dict(color='#fff'),
+        height=400,
+        showlegend=False,
+        bargap=0.1
+    )
+    
+    # Add legend manually
+    fig.add_trace(go.Scatter(
+        x=[None], y=[None],
+        mode='markers',
+        marker=dict(color='#e91e63', size=10, symbol='square'),
+        name='Opus 4',
+        showlegend=True
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=[None], y=[None],
+        mode='markers',
+        marker=dict(color='#2196f3', size=10, symbol='square'),
+        name='Sonnet 4',
+        showlegend=True
+    ))
+    
+    fig.update_layout(
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        )
+    )
+    
+    return fig
+
+
+def create_windows_timeline_chart(windows_data: Dict[str, Any]) -> go.Figure:
+    """Create an interactive timeline chart showing credit windows.
+    
+    Args:
+        windows_data: Window analysis data from get_window_analysis()
+        
+    Returns:
+        go.Figure: Timeline chart of credit windows
+    """
+    from .window_detector import CreditWindow
+    
+    windows = windows_data.get('windows', [])
+    if not windows:
+        # Return empty figure with message
+        fig = go.Figure()
+        fig.add_annotation(
+            text="No credit windows detected yet",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=20, color="gray")
+        )
+        fig.update_layout(
+            template='plotly_dark',
+            paper_bgcolor='#1a1a1a',
+            plot_bgcolor='#1a1a1a',
+            height=400
+        )
+        return fig
+    
+    # Create timeline figure
+    fig = go.Figure()
+    
+    # Add a trace for each window
+    for i, window in enumerate(windows):
+        # Calculate window metrics
+        duration = (window.end_time - window.start_time).total_seconds() / 3600
+        actual_duration = (window.messages[-1]['timestamp'] - window.start_time).total_seconds() / 3600
+        
+        # Create hover text
+        hover_text = (
+            f"<b>Window {i+1}</b><br>"
+            f"Start: {window.start_time.strftime('%Y-%m-%d %H:%M')}<br>"
+            f"Duration: {actual_duration:.1f}h / 5h<br>"
+            f"Total Cost: ${window.total_cost:.2f}<br>"
+            f"Messages: {len(window.messages)}<br>"
+            f"Opus: {len(window.opus_messages)} (${window.opus_cost:.2f})<br>"
+            f"Sonnet: {len(window.sonnet_messages)} (${window.sonnet_cost:.2f})<br>"
+        )
+        
+        if window.reached_half_credit:
+            hover_text += f"Half Credit: {window.half_credit_time.strftime('%H:%M')} (${window.half_credit_cost:.2f})"
+        
+        # Add window as a box
+        fig.add_trace(go.Scatter(
+            x=[window.start_time, window.end_time, window.end_time, window.start_time, window.start_time],
+            y=[i-0.4, i-0.4, i+0.4, i+0.4, i-0.4],
+            fill='toself',
+            fillcolor='rgba(100, 149, 237, 0.3)',
+            line=dict(color='cornflowerblue', width=2),
+            mode='lines',
+            name=f'Window {i+1}',
+            hovertext=hover_text,
+            hoverinfo='text',
+            showlegend=False
+        ))
+        
+        # Add messages as scatter points
+        for msg in window.messages:
+            msg_time = msg['timestamp']
+            color = 'red' if 'opus' in msg.get('model', '').lower() else 'blue'
+            symbol = 'circle' if 'opus' in msg.get('model', '').lower() else 'diamond'
+            
+            fig.add_trace(go.Scatter(
+                x=[msg_time],
+                y=[i],
+                mode='markers',
+                marker=dict(
+                    color=color,
+                    size=6,
+                    symbol=symbol,
+                    line=dict(width=1, color='white')
+                ),
+                hovertext=f"${msg['cost']:.4f}<br>{msg.get('model', 'unknown')}",
+                hoverinfo='text',
+                showlegend=False
+            ))
+        
+        # Mark half-credit point
+        if window.reached_half_credit and window.half_credit_time:
+            fig.add_trace(go.Scatter(
+                x=[window.half_credit_time],
+                y=[i],
+                mode='markers+text',
+                marker=dict(
+                    color='orange',
+                    size=15,
+                    symbol='star'
+                ),
+                text=['½'],
+                textposition='top center',
+                hovertext=f"Half Credit Reached<br>${window.half_credit_cost:.2f}",
+                hoverinfo='text',
+                showlegend=False
+            ))
+    
+    # Update layout
+    fig.update_layout(
+        title="Credit Windows Timeline (5-Hour Windows)",
+        xaxis_title="Time",
+        yaxis=dict(
+            title="Window",
+            tickmode='array',
+            tickvals=list(range(len(windows))),
+            ticktext=[f"Window {i+1}" for i in range(len(windows))],
+            range=[-0.5, len(windows)-0.5]
+        ),
+        template='plotly_dark',
+        paper_bgcolor='#1a1a1a',
+        plot_bgcolor='#1a1a1a',
+        font=dict(color='#fff'),
+        height=max(400, 100 * len(windows)),
+        hovermode='closest',
+        showlegend=True
+    )
+    
+    # Add legend manually
+    fig.add_trace(go.Scatter(
+        x=[None], y=[None],
+        mode='markers',
+        marker=dict(color='red', size=10, symbol='circle'),
+        name='Opus',
+        showlegend=True
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=[None], y=[None],
+        mode='markers',
+        marker=dict(color='blue', size=10, symbol='diamond'),
+        name='Sonnet',
+        showlegend=True
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=[None], y=[None],
+        mode='markers',
+        marker=dict(color='orange', size=15, symbol='star'),
+        name='Half Credit',
+        showlegend=True
+    ))
+    
+    return fig
+
+
+def create_window_stats_chart(windows_data: Dict[str, Any]) -> go.Figure:
+    """Create a chart showing window statistics.
+    
+    Args:
+        windows_data: Window analysis data
+        
+    Returns:
+        go.Figure: Window statistics chart
+    """
+    windows = windows_data.get('windows_data', [])
+    if not windows:
+        # Return empty figure
+        fig = go.Figure()
+        fig.add_annotation(
+            text="No window statistics available",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=20, color="gray")
+        )
+        fig.update_layout(
+            template='plotly_dark',
+            paper_bgcolor='#1a1a1a',
+            plot_bgcolor='#1a1a1a',
+            height=400
+        )
+        return fig
+    
+    # Create subplots for different statistics
+    fig = make_subplots(
+        rows=2, cols=2,
+        subplot_titles=(
+            'Cost per Window',
+            'Window Duration',
+            'Opus vs Sonnet Usage',
+            'Time to Half Credit'
+        ),
+        specs=[[{'type': 'bar'}, {'type': 'bar'}],
+               [{'type': 'bar'}, {'type': 'scatter'}]]
+    )
+    
+    window_labels = [f"W{i+1}" for i in range(len(windows))]
+    
+    # 1. Cost per window
+    costs = [w['total_cost'] for w in windows]
+    fig.add_trace(
+        go.Bar(
+            x=window_labels,
+            y=costs,
+            name='Total Cost',
+            marker_color='cornflowerblue',
+            text=[f"${c:.2f}" for c in costs],
+            textposition='auto'
+        ),
+        row=1, col=1
+    )
+    
+    # 2. Window duration
+    durations = [w['actual_duration_hours'] for w in windows]
+    fig.add_trace(
+        go.Bar(
+            x=window_labels,
+            y=durations,
+            name='Duration (hours)',
+            marker_color='lightgreen',
+            text=[f"{d:.1f}h" for d in durations],
+            textposition='auto'
+        ),
+        row=1, col=2
+    )
+    
+    # 3. Opus vs Sonnet usage
+    opus_costs = [w['opus_cost'] for w in windows]
+    sonnet_costs = [w['sonnet_cost'] for w in windows]
+    
+    fig.add_trace(
+        go.Bar(
+            x=window_labels,
+            y=opus_costs,
+            name='Opus',
+            marker_color='red'
+        ),
+        row=2, col=1
+    )
+    
+    fig.add_trace(
+        go.Bar(
+            x=window_labels,
+            y=sonnet_costs,
+            name='Sonnet',
+            marker_color='blue'
+        ),
+        row=2, col=1
+    )
+    
+    # 4. Time to half credit (for windows that reached it)
+    windows_with_half = [(i, w) for i, w in enumerate(windows) if w['hours_to_half_credit'] is not None]
+    if windows_with_half:
+        indices, windows_half = zip(*windows_with_half)
+        labels_half = [f"W{i+1}" for i in indices]
+        hours_to_half = [w['hours_to_half_credit'] for w in windows_half]
+        
+        fig.add_trace(
+            go.Scatter(
+                x=labels_half,
+                y=hours_to_half,
+                mode='markers+lines',
+                name='Hours to ½',
+                marker=dict(size=10, color='orange'),
+                line=dict(color='orange', dash='dash')
+            ),
+            row=2, col=2
+        )
+    
+    # Update layout
+    fig.update_layout(
+        template='plotly_dark',
+        paper_bgcolor='#1a1a1a',
+        plot_bgcolor='#1a1a1a',
+        font=dict(color='#fff'),
+        height=600,
+        showlegend=False,
+        title_text="Credit Window Statistics"
+    )
+    
+    # Update y-axes
+    fig.update_yaxes(title_text="Cost ($)", row=1, col=1)
+    fig.update_yaxes(title_text="Hours", row=1, col=2)
+    fig.update_yaxes(title_text="Cost ($)", row=2, col=1)
+    fig.update_yaxes(title_text="Hours", row=2, col=2)
+    
+    return fig
+
+
+def create_current_window_gauge(windows_data: Dict[str, Any]) -> go.Figure:
+    """Create a gauge showing current window status.
+    
+    Args:
+        windows_data: Window analysis data
+        
+    Returns:
+        go.Figure: Gauge chart showing current window progress
+    """
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    from .data_processor import get_local_timezone
+    
+    windows = windows_data.get('windows', [])
+    if not windows:
+        # No windows at all
+        fig = go.Figure()
+        fig.add_annotation(
+            text="No credit windows detected",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=20, color="gray")
+        )
+        fig.update_layout(
+            template='plotly_dark',
+            paper_bgcolor='#1a1a1a',
+            plot_bgcolor='#1a1a1a',
+            height=300
+        )
+        return fig
+    
+    # Get local timezone
+    local_tz = get_local_timezone()
+    utc_tz = ZoneInfo('UTC')
+    
+    # Convert string timestamps to datetime objects with proper timezone
+    for window in windows:
+        if isinstance(window['start_time'], str):
+            window['start_time'] = datetime.fromisoformat(window['start_time'].replace('Z', '+00:00'))
+            if window['start_time'].tzinfo is None:
+                window['start_time'] = window['start_time'].replace(tzinfo=utc_tz)
+            window['start_time'] = window['start_time'].astimezone(local_tz)
+        if isinstance(window['end_time'], str):
+            window['end_time'] = datetime.fromisoformat(window['end_time'].replace('Z', '+00:00'))
+            if window['end_time'].tzinfo is None:
+                window['end_time'] = window['end_time'].replace(tzinfo=utc_tz)
+            window['end_time'] = window['end_time'].astimezone(local_tz)
+    
+    current_window = None
+    
+    # Find current active window
+    now = datetime.now(tz=local_tz)
+    for window in windows:
+        if window['start_time'] <= now < window['end_time']:
+            current_window = window
+            break
+    
+    if not current_window:
+        # No active window
+        fig = go.Figure()
+        fig.add_annotation(
+            text="No active credit window",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=20, color="gray")
+        )
+        fig.update_layout(
+            template='plotly_dark',
+            paper_bgcolor='#1a1a1a',
+            plot_bgcolor='#1a1a1a',
+            height=300
+        )
+        return fig
+    
+    # Calculate progress
+    elapsed = (now - current_window['start_time']).total_seconds() / 3600
+    progress_pct = min(elapsed / 5 * 100, 100)
+    
+    # Create gauge
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number+delta",
+        value=current_window.get('total_cost', 0),
+        title={'text': f"Current Window ({progress_pct:.0f}% complete)"},
+        delta={'reference': 50, 'increasing': {'color': "red"}},
+        gauge={
+            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
+            'bar': {'color': "darkblue"},
+            'bgcolor': "white",
+            'borderwidth': 2,
+            'bordercolor': "gray",
+            'steps': [
+                {'range': [0, 50], 'color': 'lightgreen'},
+                {'range': [50, 75], 'color': 'yellow'},
+                {'range': [75, 100], 'color': 'lightcoral'}
+            ],
+            'threshold': {
+                'line': {'color': "red", 'width': 4},
+                'thickness': 0.75,
+                'value': 90
+            }
+        }
+    ))
+    
+    # Add annotations
+    fig.add_annotation(
+        text=f"Started: {current_window['start_time'].strftime('%H:%M')}",
+        xref="paper", yref="paper",
+        x=0.5, y=-0.2,
+        showarrow=False,
+        font=dict(size=12)
+    )
+    
+    if current_window.get('reached_half_credit', False):
+        half_credit_time = current_window.get('half_credit_time')
+        if half_credit_time:
+            if isinstance(half_credit_time, str):
+                half_credit_time = datetime.fromisoformat(half_credit_time.replace('Z', '+00:00'))
+                if half_credit_time.tzinfo is None:
+                    half_credit_time = half_credit_time.replace(tzinfo=utc_tz)
+                half_credit_time = half_credit_time.astimezone(local_tz)
+            fig.add_annotation(
+                text=f"Half credit reached at {half_credit_time.strftime('%H:%M')}",
+                xref="paper", yref="paper",
+                x=0.5, y=-0.3,
+                showarrow=False,
+                font=dict(size=12, color="orange")
+            )
+    
+    fig.update_layout(
+        template='plotly_dark',
+        paper_bgcolor='#1a1a1a',
+        plot_bgcolor='#1a1a1a',
+        font=dict(color='#fff'),
+        height=300
+    )
+    
+    return fig

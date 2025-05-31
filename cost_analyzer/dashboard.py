@@ -10,10 +10,11 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.graph_objects as go
 
-from .data_processor import calculate_statistics
+from .data_processor import calculate_statistics, get_window_analysis
 from .predictions import predict_future_costs
 from .visualizations import (
-    create_main_figure, create_additional_charts, create_token_charts
+    create_main_figure, create_additional_charts, create_token_charts,
+    create_windows_timeline_chart, create_window_stats_chart, create_current_window_gauge
 )
 
 
@@ -196,6 +197,7 @@ def create_layout() -> dbc.Container:
             dbc.Tab(label="🎯 Analysis", tab_id="analysis"),
             dbc.Tab(label="🔢 Tokens", tab_id="tokens"),
             dbc.Tab(label="🔮 Predictions", tab_id="predictions"),
+            dbc.Tab(label="⏰ Windows", tab_id="windows"),
         ], id="tabs", active_tab="overview", className="mb-4"),
         
         # Tab content
@@ -208,6 +210,7 @@ def create_layout() -> dbc.Container:
         dcc.Store(id='charts-store'),
         dcc.Store(id='full-data-store'),  # Store unfiltered data
         dcc.Store(id='token-data-store'),  # Store token data
+        dcc.Store(id='window-data-store'),  # Store window analysis data
         
     ], fluid=True, style={'backgroundColor': '#0a0a0a'})
 

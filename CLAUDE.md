@@ -24,16 +24,92 @@ The script will:
 - Open your browser automatically to display the dashboard
 - Provide real-time data refresh capabilities
 
+## Data Validation Testing
+
+A standalone test script is available to validate JSONL data loading and check for timezone/time issues:
+
+```bash
+# Make the script executable (if needed)
+chmod +x test_data_validation.py
+
+# Run the validation test
+./test_data_validation.py
+```
+
+The test script performs comprehensive validation:
+
+### What It Tests
+1. **Timestamp Validation**
+   - Checks for missing or invalid timestamps
+   - Validates timezone conversions (UTC to local)
+   - Identifies suspicious times (e.g., exact midnight)
+   - Shows examples of timestamp conversion
+
+2. **Credit Window Detection**
+   - Detects 5-hour credit windows based on activity gaps
+   - Windows are global across ALL JSONL files
+   - Tracks Opus → Sonnet model transitions
+   - Identifies when "half-credit" is reached using a rolling window approach:
+     - Checks the last 10 messages in the window
+     - Half-credit triggers when >80% of these recent messages are Sonnet
+   - Shows windows with high Sonnet usage (>50%) for analysis
+
+3. **Half-Credit Time Analysis**
+   - Analyzes all "half-credit reached" times
+   - Detects suspicious patterns (e.g., always showing 00:37)
+   - Calculates hours to reach half-credit
+   - Shows recent half-credit times with full context
+
+4. **Data Summary**
+   - Date range of all data
+   - Model distribution (Opus vs Sonnet usage)
+   - Total messages and costs
+
+### Example Issues It Can Detect
+- **Timezone Problems**: If times are showing in UTC instead of local time
+- **Stale Data**: If "half-credit reached" shows time from a previous window
+- **Data Anomalies**: Unusually quick transitions to half-credit
+- **Pattern Detection**: Repeated exact times (like always 00:37)
+
+### Output Format
+The test uses Rich for formatted console output with:
+- Color-coded status messages
+- Formatted tables showing timestamp conversions
+- Highlighted warnings for suspicious patterns
+- Summary statistics
+
+This test is useful for debugging data issues before they appear in the dashboard.
+
+### Important: After Changes
+When the window detection logic is changed (e.g., the half-credit threshold), you need to:
+1. Restart the dashboard: `./analyzer.py`
+2. Run the validation test: `./test_data_validation.py`
+3. Compare the results to ensure windows are detected correctly
+
 ## Key Architecture
 
 The dashboard processes Claude Code usage data through these components:
 
 ### Data Processing Pipeline
 1. **Data Loading**: Scans `~/.claude/projects/` recursively for `.jsonl` files
-2. **Project Extraction**: Intelligently extracts and cleans project names from file paths
-3. **Cost Aggregation**: Aggregates costs by date and project from the `costUSD` field
-4. **Statistical Analysis**: Calculates comprehensive statistics including averages, medians, and trends
-5. **Predictive Modeling**: Uses polynomial regression to forecast future costs
+2. **Data Persistence**: All usage data and credit windows are stored in SQLite database at `~/.claude/usage_data.db`
+3. **Window Detection**: Credit windows are global across ALL JSONL files, not per-file
+   - Windows are saved to the database for persistence
+   - Automatically reloaded even if JSONL files are deleted
+   - Recalculated only when new data is detected
+4. **Project Extraction**: Intelligently extracts and cleans project names from file paths
+5. **Cost Aggregation**: Aggregates costs by date and project from the `costUSD` field
+6. **Statistical Analysis**: Calculates comprehensive statistics including averages, medians, and trends
+7. **Predictive Modeling**: Uses polynomial regression to forecast future costs
+
+### Credit Windows
+- **5-Hour Windows**: Each window lasts 5 hours from first activity
+- **Global Windows**: Windows span across all JSONL files based on timestamps
+- **Half-Credit Detection**: 
+  - Triggered when switching from Opus to Sonnet
+  - **Important**: Checks the last 10 messages in a window
+  - Half-credit is reached when >80% of the last 10 messages are Sonnet
+  - This rolling window approach detects sustained switches to Sonnet, not temporary spikes
 
 ### Dashboard Features
 - **Date Range Selection**: 
@@ -102,7 +178,8 @@ Treats high-cost periods as "events" that have a certain survival probability:
 
 ## Development Notes
 
-- The script uses `uv` for dependency management with inline script dependencies
+- **IMPORTANT**: The script uses `uv` for dependency management with inline script dependencies. You MUST use `uv` for all Python tools and scripts you create in this project. This is critical for proper dependency management and script execution.
+- All Python scripts should start with `#!/usr/bin/env -S uv run --script` and include inline dependencies in the script header
 - Requires Python >=3.9
 - Uses `os.path.expanduser()` for cross-platform home directory resolution
 - Handles malformed JSONL entries gracefully with try/except blocks
@@ -110,3 +187,22 @@ Treats high-cost periods as "events" that have a certain survival probability:
 - All charts use Plotly's dark theme for consistency
 - Data is stored in Dash Store components for efficient cross-callback communication
 - Date filtering is applied consistently across all visualizations and statistics
+- All timestamps from JSONL files (UTC with 'Z' suffix) are converted to local timezone for display
+- Half-credit times are properly converted from UTC to local timezone in the dashboard
+
+### Database Structure
+- SQLite database at `~/.claude/usage_data.db` stores:
+  - `usage_records`: Individual usage entries from JSONL files
+  - `credit_windows`: Detected 5-hour credit windows
+  - `window_messages`: Messages within each window
+- Windows are persisted to survive JSONL file deletions
+- Database is automatically created on first run
+
+## Workflow
+
+- Don't hesitate to ask clarifying questions and update your plan when you get answers
+- Type check and run builds regularly once things are ok
+- Make plans and describe how you will know you have achieved those. If you detect issues you can write them in TODO.md and continue on with your task
+- If this is a feature that requires to manage data or that require analysis don't hesitate to write a tool in an adequate language (Python or the project language preferred)
+- Write and maintain tests, tests are inexpensive and allow you to work much better
+- When things don't work as you had planned, update the CLAUDE.md file to reflect that (talk always in positive)
