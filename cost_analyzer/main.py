@@ -364,6 +364,7 @@ def register_callbacks(app: dash.Dash) -> None:
             
             # Create window statistics cards
             total_windows = window_data_store.get('total_windows', 0)
+            filtered_windows = window_data_store.get('filtered_windows', 0)
             windows_reached_half = window_data_store.get('windows_reached_half_credit', 0)
             avg_cost_per_window = window_data_store.get('avg_cost_per_window', 0)
             avg_hours_to_half = window_data_store.get('avg_hours_to_half_credit', 0)
@@ -417,7 +418,8 @@ def register_callbacks(app: dash.Dash) -> None:
                                 dbc.Card([
                                     dbc.CardBody([
                                         html.H4("Windows Hit ½ Credit", className="card-title"),
-                                        html.H2(f"{windows_reached_half}/{total_windows}", className="text-warning"),
+                                        html.H2(f"{windows_reached_half}/{filtered_windows}", className="text-warning"),
+                                        html.Small(f"(Windows >$10)", className="text-muted")
                                     ])
                                 ], className="stats-card text-white")
                             ], width=6),
@@ -426,6 +428,7 @@ def register_callbacks(app: dash.Dash) -> None:
                                     dbc.CardBody([
                                         html.H4("Avg Time to ½", className="card-title"),
                                         html.H2(f"{avg_hours_to_half:.1f}h" if avg_hours_to_half else "N/A", className="text-success"),
+                                        html.Small(f"(Windows >$10)", className="text-muted")
                                     ])
                                 ], className="stats-card text-white")
                             ], width=6),

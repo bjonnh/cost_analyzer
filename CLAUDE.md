@@ -206,3 +206,4 @@ Treats high-cost periods as "events" that have a certain survival probability:
 - If this is a feature that requires to manage data or that require analysis don't hesitate to write a tool in an adequate language (Python or the project language preferred)
 - Write and maintain tests, tests are inexpensive and allow you to work much better
 - When things don't work as you had planned, update the CLAUDE.md file to reflect that (talk always in positive)
+- **Remember to always run tests and always write tests**

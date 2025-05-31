@@ -128,22 +128,28 @@ def detect_windows(records: List[Dict[str, Any]]) -> List[CreditWindow]:
         if current_window is None:
             # First window
             current_window = CreditWindow(timestamp)
-        elif not current_window.contains_time(timestamp):
-            # Current timestamp is outside the 5-hour window
-            windows.append(current_window)
-            current_window = CreditWindow(timestamp)
-        elif (current_window.reached_half_credit and 
-              model and 'opus' in model.lower() and 
-              timestamp > current_window.half_credit_time + timedelta(minutes=1)):
-            # Opus is available again after using sonnet - new window
-            windows.append(current_window)
-            current_window = CreditWindow(timestamp)
-        
-        # Check for 5+ hour gap (new window due to inactivity)
-        if (current_window.messages and 
-            timestamp - current_window.messages[-1]['timestamp'] >= timedelta(hours=5)):
-            windows.append(current_window)
-            current_window = CreditWindow(timestamp)
+        else:
+            # Check if this is a new window period
+            # A new window starts if:
+            # 1. We're outside the current 5-hour window period
+            # 2. OR there's been a long gap (>5 hours) since any activity
+            time_since_window_start = timestamp - current_window.start_time
+            time_since_last_activity = timestamp - current_window.messages[-1]['timestamp'] if current_window.messages else timedelta(0)
+            
+            if time_since_window_start >= timedelta(hours=5):
+                # We're past the 5-hour window period
+                windows.append(current_window)
+                current_window = CreditWindow(timestamp)
+            elif time_since_last_activity >= timedelta(hours=5):
+                # Long inactivity gap - credit should have reset
+                windows.append(current_window)
+                current_window = CreditWindow(timestamp)
+            elif (current_window.reached_half_credit and 
+                  model and 'opus' in model.lower() and 
+                  timestamp > current_window.half_credit_time + timedelta(minutes=1)):
+                # Opus is available again after using sonnet - new window
+                windows.append(current_window)
+                current_window = CreditWindow(timestamp)
         
         # Add message to current window
         uuid = record.get('uuid')
@@ -156,12 +162,13 @@ def detect_windows(records: List[Dict[str, Any]]) -> List[CreditWindow]:
     return windows
 
 
-def analyze_windows(windows: List[CreditWindow]) -> Dict[str, Any]:
+def analyze_windows(windows: List[CreditWindow], min_window_cost: float = 0.0) -> Dict[str, Any]:
     """
     Analyze detected windows to provide statistics.
     
     Args:
         windows: List of CreditWindow objects
+        min_window_cost: Minimum cost threshold for including windows in statistics
         
     Returns:
         Dictionary with window statistics
@@ -169,6 +176,7 @@ def analyze_windows(windows: List[CreditWindow]) -> Dict[str, Any]:
     if not windows:
         return {
             'total_windows': 0,
+            'filtered_windows': 0,
             'windows_data': []
         }
     
@@ -190,30 +198,44 @@ def analyze_windows(windows: List[CreditWindow]) -> Dict[str, Any]:
         
         windows_data.append(window_dict)
     
-    # Overall statistics
-    total_cost = sum(w.total_cost for w in windows)
-    total_opus_cost = sum(w.opus_cost for w in windows)
-    total_sonnet_cost = sum(w.sonnet_cost for w in windows)
-    windows_reached_half = sum(1 for w in windows if w.reached_half_credit)
+    # Filter windows for statistics based on minimum cost
+    stats_windows = [w for w in windows if w.total_cost >= min_window_cost]
     
-    avg_cost_per_window = total_cost / len(windows) if windows else 0
-    avg_hours_to_half = []
-    for w in windows:
-        if w.reached_half_credit and w.half_credit_time:
-            hours = (w.half_credit_time - w.start_time).total_seconds() / 3600
-            avg_hours_to_half.append(hours)
+    # Overall statistics (using filtered windows)
+    if stats_windows:
+        total_cost = sum(w.total_cost for w in stats_windows)
+        total_opus_cost = sum(w.opus_cost for w in stats_windows)
+        total_sonnet_cost = sum(w.sonnet_cost for w in stats_windows)
+        windows_reached_half = sum(1 for w in stats_windows if w.reached_half_credit)
+        
+        avg_cost_per_window = total_cost / len(stats_windows)
+        avg_hours_to_half = []
+        for w in stats_windows:
+            if w.reached_half_credit and w.half_credit_time:
+                hours = (w.half_credit_time - w.start_time).total_seconds() / 3600
+                avg_hours_to_half.append(hours)
+    else:
+        # No windows meet the minimum cost threshold
+        total_cost = 0
+        total_opus_cost = 0
+        total_sonnet_cost = 0
+        windows_reached_half = 0
+        avg_cost_per_window = 0
+        avg_hours_to_half = []
     
     return {
         'total_windows': len(windows),
+        'filtered_windows': len(stats_windows),
         'total_cost_all_windows': round(total_cost, 2),
         'avg_cost_per_window': round(avg_cost_per_window, 2),
         'windows_reached_half_credit': windows_reached_half,
-        'percent_windows_reached_half': round(100 * windows_reached_half / len(windows), 1) if windows else 0,
+        'percent_windows_reached_half': round(100 * windows_reached_half / len(stats_windows), 1) if stats_windows else 0,
         'total_opus_cost': round(total_opus_cost, 2),
         'total_sonnet_cost': round(total_sonnet_cost, 2),
         'opus_cost_percentage': round(100 * total_opus_cost / total_cost, 1) if total_cost > 0 else 0,
         'avg_hours_to_half_credit': round(sum(avg_hours_to_half) / len(avg_hours_to_half), 2) if avg_hours_to_half else None,
-        'windows_data': windows_data
+        'windows_data': windows_data,
+        'min_window_cost': min_window_cost
     }
 
 

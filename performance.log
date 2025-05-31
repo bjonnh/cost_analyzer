@@ -1651,3 +1651,556 @@
 2025-05-31 16:06:02,971 - INFO - Window analysis: 0.0588s 
 2025-05-31 16:06:02,980 - INFO - Chart JSON conversion: 0.0090s chart_count=12
 2025-05-31 16:06:02,980 - INFO - Total update_data_stores callback: 0.8866s 
+2025-05-31 16:27:17,837 - INFO - Starting main() function
+2025-05-31 16:27:17,837 - INFO - Starting create_app()
+2025-05-31 16:27:17,841 - INFO - Dash initialization: 0.0039s 
+2025-05-31 16:27:17,842 - INFO - Layout creation: 0.0010s 
+2025-05-31 16:27:17,842 - INFO - Callback registration: 0.0003s 
+2025-05-31 16:27:17,842 - INFO - Total create_app(): 0.0053s 
+2025-05-31 16:27:17,842 - INFO - Total startup time: 0.0055s 
+2025-05-31 16:27:17,842 - INFO - App startup complete, starting server
+2025-05-31 16:27:27,395 - INFO - Starting update_data_stores callback
+2025-05-31 16:27:27,395 - INFO - Starting refresh_and_load_data()
+2025-05-31 16:27:27,395 - INFO - Starting load_cost_data()
+2025-05-31 16:27:27,396 - INFO - Database initialization: 0.0004s 
+2025-05-31 16:27:27,396 - INFO - File scanning: 0.0003s files_found=52
+2025-05-31 16:27:27,396 - INFO - Timezone setup: 0.0002s 
+2025-05-31 16:27:27,397 - INFO - File processing [3/52]: 0.0004s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 16:27:27,398 - INFO - File processing [1/52]: 0.0011s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 16:27:27,398 - INFO - File processing [4/52]: 0.0006s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 16:27:27,399 - INFO - File processing [5/52]: 0.0003s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 16:27:27,400 - INFO - File processing [2/52]: 0.0029s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 16:27:27,401 - INFO - File processing [6/52]: 0.0021s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 16:27:27,401 - INFO - File processing [10/52]: 0.0012s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 16:27:27,401 - INFO - File processing [8/52]: 0.0026s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 16:27:27,417 - INFO - File processing [9/52]: 0.0172s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 16:27:27,424 - INFO - File processing [7/52]: 0.0249s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 16:27:27,424 - INFO - File processing [12/52]: 0.0005s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 16:27:27,424 - INFO - File processing [13/52]: 0.0000s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 16:27:27,431 - INFO - File processing [14/52]: 0.0064s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 16:27:27,454 - INFO - File processing [16/52]: 0.0235s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 16:27:27,476 - INFO - File processing [17/52]: 0.0454s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 16:27:27,479 - INFO - File processing [18/52]: 0.0243s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 16:27:27,490 - INFO - File processing [15/52]: 0.0655s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 16:27:27,495 - INFO - File processing [11/52]: 0.0947s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 16:27:27,562 - INFO - File processing [25/52]: 0.0002s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 16:27:27,495 - INFO - File processing [20/52]: 0.0001s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 16:27:27,499 - INFO - File processing [21/52]: 0.0041s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 16:27:27,541 - INFO - File processing [19/52]: 0.0465s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 16:27:27,495 - INFO - File processing [22/52]: 0.0000s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 16:27:27,585 - INFO - File processing [24/52]: 0.0765s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 16:27:27,595 - INFO - File processing [29/52]: 0.0097s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 16:27:27,607 - INFO - File processing [28/52]: 0.0274s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 16:27:27,628 - INFO - File processing [34/52]: 0.0003s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 16:27:27,645 - INFO - File processing [32/52]: 0.0380s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 16:27:27,682 - INFO - File processing [23/52]: 0.1738s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 16:27:27,683 - INFO - File processing [27/52]: 0.1205s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=74 records=33
+2025-05-31 16:27:27,683 - INFO - File processing [33/52]: 0.0554s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 16:27:27,683 - INFO - File processing [30/52]: 0.0877s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 16:27:27,689 - INFO - File processing [36/52]: 0.0068s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 16:27:27,710 - INFO - File processing [35/52]: 0.0820s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 16:27:27,729 - INFO - File processing [42/52]: 0.0001s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 16:27:27,714 - INFO - File processing [37/52]: 0.0311s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 16:27:27,715 - INFO - File processing [26/52]: 0.1525s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 16:27:27,715 - INFO - File processing [40/52]: 0.0001s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 16:27:27,718 - INFO - File processing [39/52]: 0.0032s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 16:27:27,729 - INFO - File processing [38/52]: 0.0144s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 16:27:27,700 - INFO - File processing [31/52]: 0.0933s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 16:27:27,741 - INFO - File processing [41/52]: 0.0227s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 16:27:27,749 - INFO - File processing [43/52]: 0.0193s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 16:27:27,755 - INFO - File processing [44/52]: 0.0251s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 16:27:27,756 - INFO - File processing [45/52]: 0.0089s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 16:27:27,761 - INFO - File processing [48/52]: 0.0000s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 16:27:27,761 - INFO - File processing [46/52]: 0.0065s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 16:27:27,762 - INFO - File processing [47/52]: 0.0071s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 16:27:27,776 - INFO - File processing [49/52]: 0.0148s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 16:27:27,778 - INFO - File processing [50/52]: 0.0159s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 16:27:27,782 - INFO - File processing [52/52]: 0.0086s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 16:27:27,787 - INFO - File processing [51/52]: 0.0140s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 16:27:27,820 - INFO - Database batch insert (highly optimized): 0.0310s record_count=4310
+2025-05-31 16:27:27,820 - INFO - File processing (parallel): 0.4241s total_lines=9269 total_records=4310 max_workers=8 file_processing_only=True
+2025-05-31 16:27:27,820 - INFO - Data sorting: 0.0000s dates=10 projects=5
+2025-05-31 16:27:27,822 - INFO - Cost DataFrame creation: 0.0017s shape=(10, 5)
+2025-05-31 16:27:27,823 - INFO - Cost DataFrame filtering: 0.0010s final_shape=(10, 5)
+2025-05-31 16:27:27,838 - INFO - Token DataFrame creation: 0.0145s shape=(10, 25)
+2025-05-31 16:27:27,838 - INFO - Total load_cost_data(): 0.4424s final_dates=10 final_projects=5 total_cost=$651.1033
+2025-05-31 16:27:27,839 - INFO - JSONL scanning and database update: 0.4438s 
+2025-05-31 16:27:27,839 - INFO - Starting load_data_from_database()
+2025-05-31 16:27:27,839 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 16:27:27,846 - INFO - Database query: 0.0069s records_count=4310
+2025-05-31 16:27:27,857 - INFO - Record processing (DB load): 0.0106s processed_records=4310
+2025-05-31 16:27:27,857 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=5
+2025-05-31 16:27:27,858 - INFO - Cost DataFrame creation (DB load): 0.0013s shape=(10, 5)
+2025-05-31 16:27:27,859 - INFO - Cost DataFrame filtering (DB load): 0.0008s final_shape=(10, 5)
+2025-05-31 16:27:27,873 - INFO - Token DataFrame creation (DB load): 0.0142s shape=(10, 25)
+2025-05-31 16:27:27,873 - INFO - Total load_data_from_database(): 0.0342s final_dates=10 final_projects=5 total_cost=$651.1033
+2025-05-31 16:27:27,874 - INFO - Database loading: 0.0345s 
+2025-05-31 16:27:27,874 - INFO - Total refresh_and_load_data(): 0.4784s 
+2025-05-31 16:27:27,874 - INFO - Data refresh in callback: 0.4784s 
+2025-05-31 16:27:27,878 - INFO - Statistics calculation: 0.0027s 
+2025-05-31 16:27:27,879 - INFO - Predictions calculation: 0.0011s 
+2025-05-31 16:27:28,077 - INFO - Chart creation: 0.1979s 
+2025-05-31 16:27:28,113 - INFO - Token chart creation: 0.0354s 
+2025-05-31 17:59:01,436 - INFO - Starting main() function
+2025-05-31 17:59:01,437 - INFO - Starting create_app()
+2025-05-31 17:59:01,443 - INFO - Dash initialization: 0.0063s 
+2025-05-31 17:59:01,444 - INFO - Layout creation: 0.0010s 
+2025-05-31 17:59:01,444 - INFO - Callback registration: 0.0003s 
+2025-05-31 17:59:01,444 - INFO - Total create_app(): 0.0077s 
+2025-05-31 17:59:01,444 - INFO - Total startup time: 0.0081s 
+2025-05-31 17:59:01,444 - INFO - App startup complete, starting server
+2025-05-31 17:59:04,199 - INFO - Starting update_data_stores callback
+2025-05-31 17:59:04,200 - INFO - Starting refresh_and_load_data()
+2025-05-31 17:59:04,200 - INFO - Starting load_cost_data()
+2025-05-31 17:59:04,201 - INFO - Database initialization: 0.0011s 
+2025-05-31 17:59:04,203 - INFO - File scanning: 0.0017s files_found=52
+2025-05-31 17:59:04,203 - INFO - Timezone setup: 0.0003s 
+2025-05-31 17:59:04,204 - INFO - File processing [1/52]: 0.0008s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 17:59:04,204 - INFO - File processing [3/52]: 0.0002s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 17:59:04,205 - INFO - File processing [2/52]: 0.0018s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 17:59:04,206 - INFO - File processing [4/52]: 0.0017s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 17:59:04,207 - INFO - File processing [5/52]: 0.0020s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 17:59:04,207 - INFO - File processing [6/52]: 0.0025s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 17:59:04,208 - INFO - File processing [8/52]: 0.0013s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 17:59:04,221 - INFO - File processing [9/52]: 0.0122s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 17:59:04,221 - INFO - File processing [14/52]: 0.0001s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 17:59:04,229 - INFO - File processing [10/52]: 0.0208s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 17:59:04,230 - INFO - File processing [12/52]: 0.0214s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 17:59:04,231 - INFO - File processing [13/52]: 0.0168s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 17:59:04,266 - INFO - File processing [7/52]: 0.0611s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 17:59:04,270 - INFO - File processing [15/52]: 0.0388s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 17:59:04,300 - INFO - File processing [17/52]: 0.0439s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 17:59:04,308 - INFO - File processing [18/52]: 0.0269s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 17:59:04,315 - INFO - File processing [16/52]: 0.0834s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 17:59:04,328 - INFO - File processing [11/52]: 0.1189s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 17:59:04,352 - INFO - File processing [21/52]: 0.0242s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 17:59:04,411 - INFO - File processing [19/52]: 0.1150s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 17:59:04,411 - INFO - File processing [20/52]: 0.1148s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 17:59:04,452 - INFO - File processing [22/52]: 0.1239s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 17:59:04,457 - INFO - File processing [24/52]: 0.0264s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 17:59:04,457 - INFO - File processing [25/52]: 0.0003s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 17:59:04,503 - INFO - File processing [30/52]: 0.0003s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 17:59:04,502 - INFO - File processing [26/52]: 0.0449s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 17:59:04,502 - INFO - File processing [27/52]: 0.0312s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=129 records=59
+2025-05-31 17:59:04,503 - INFO - File processing [28/52]: 0.0092s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 17:59:04,466 - INFO - File processing [23/52]: 0.1175s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 17:59:04,503 - INFO - File processing [32/52]: 0.0002s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 17:59:04,508 - INFO - File processing [33/52]: 0.0053s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 17:59:04,509 - INFO - File processing [36/52]: 0.0050s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 17:59:04,509 - INFO - File processing [40/52]: 0.0001s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 17:59:04,529 - INFO - File processing [34/52]: 0.0257s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 17:59:04,552 - INFO - File processing [35/52]: 0.0488s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 17:59:04,561 - INFO - File processing [39/52]: 0.0529s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 17:59:04,568 - INFO - File processing [29/52]: 0.0742s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 17:59:04,577 - INFO - File processing [31/52]: 0.0747s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 17:59:04,580 - INFO - File processing [37/52]: 0.0761s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 17:59:04,581 - INFO - File processing [38/52]: 0.0775s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 17:59:04,581 - INFO - File processing [42/52]: 0.0136s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 17:59:04,589 - INFO - File processing [43/52]: 0.0215s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 17:59:04,608 - INFO - File processing [41/52]: 0.0732s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 17:59:04,609 - INFO - File processing [45/52]: 0.0220s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 17:59:04,613 - INFO - File processing [46/52]: 0.0053s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 17:59:04,617 - INFO - File processing [44/52]: 0.0368s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 17:59:04,617 - INFO - File processing [48/52]: 0.0000s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 17:59:04,618 - INFO - File processing [47/52]: 0.0011s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 17:59:04,627 - INFO - File processing [49/52]: 0.0096s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 17:59:04,634 - INFO - File processing [50/52]: 0.0167s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 17:59:04,638 - INFO - File processing [52/52]: 0.0191s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 17:59:04,643 - INFO - File processing [51/52]: 0.0248s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 17:59:04,690 - INFO - Database batch insert (highly optimized): 0.0451s record_count=4336
+2025-05-31 17:59:04,690 - INFO - File processing (parallel): 0.4869s total_lines=9324 total_records=4336 max_workers=8 file_processing_only=True
+2025-05-31 17:59:04,690 - INFO - Data sorting: 0.0000s dates=10 projects=5
+2025-05-31 17:59:04,692 - INFO - Cost DataFrame creation: 0.0017s shape=(10, 5)
+2025-05-31 17:59:04,693 - INFO - Cost DataFrame filtering: 0.0010s final_shape=(10, 5)
+2025-05-31 17:59:04,708 - INFO - Token DataFrame creation: 0.0150s shape=(10, 25)
+2025-05-31 17:59:04,708 - INFO - Total load_cost_data(): 0.5081s final_dates=10 final_projects=5 total_cost=$656.6162
+2025-05-31 17:59:04,711 - INFO - JSONL scanning and database update: 0.5117s 
+2025-05-31 17:59:04,711 - INFO - Starting load_data_from_database()
+2025-05-31 17:59:04,711 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 17:59:04,718 - INFO - Database query: 0.0068s records_count=4336
+2025-05-31 17:59:04,729 - INFO - Record processing (DB load): 0.0104s processed_records=4336
+2025-05-31 17:59:04,729 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=5
+2025-05-31 17:59:04,730 - INFO - Cost DataFrame creation (DB load): 0.0012s shape=(10, 5)
+2025-05-31 17:59:04,731 - INFO - Cost DataFrame filtering (DB load): 0.0007s final_shape=(10, 5)
+2025-05-31 17:59:04,745 - INFO - Token DataFrame creation (DB load): 0.0139s shape=(10, 25)
+2025-05-31 17:59:04,745 - INFO - Total load_data_from_database(): 0.0334s final_dates=10 final_projects=5 total_cost=$656.6162
+2025-05-31 17:59:04,745 - INFO - Database loading: 0.0337s 
+2025-05-31 17:59:04,745 - INFO - Total refresh_and_load_data(): 0.5455s 
+2025-05-31 17:59:04,745 - INFO - Data refresh in callback: 0.5455s 
+2025-05-31 17:59:04,750 - INFO - Statistics calculation: 0.0028s 
+2025-05-31 17:59:04,751 - INFO - Predictions calculation: 0.0012s 
+2025-05-31 17:59:05,049 - INFO - Chart creation: 0.2981s 
+2025-05-31 17:59:05,090 - INFO - Token chart creation: 0.0406s 
+2025-05-31 17:59:05,111 - INFO - Window analysis: 0.0209s 
+2025-05-31 17:59:05,120 - INFO - Chart JSON conversion: 0.0089s chart_count=12
+2025-05-31 17:59:05,120 - INFO - Total update_data_stores callback: 0.9210s 
+2025-05-31 18:17:38,393 - INFO - Starting update_data_stores callback
+2025-05-31 18:17:38,393 - INFO - Starting refresh_and_load_data()
+2025-05-31 18:17:38,393 - INFO - Starting load_cost_data()
+2025-05-31 18:17:38,394 - INFO - Database initialization: 0.0006s 
+2025-05-31 18:17:38,394 - INFO - File scanning: 0.0004s files_found=53
+2025-05-31 18:17:38,394 - INFO - Timezone setup: 0.0001s 
+2025-05-31 18:17:38,395 - INFO - File processing [2/53]: 0.0009s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 18:17:38,396 - INFO - File processing [3/53]: 0.0016s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 18:17:38,397 - INFO - File processing [5/53]: 0.0022s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 18:17:38,397 - INFO - File processing [4/53]: 0.0026s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 18:17:38,398 - INFO - File processing [6/53]: 0.0026s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 18:17:38,399 - INFO - File processing [1/53]: 0.0050s file=27c59ced-1d84-4507-8452-3f5656ffb78c.jsonl lines=47 records=23
+2025-05-31 18:17:38,400 - INFO - File processing [11/53]: 0.0003s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 18:17:38,401 - INFO - File processing [9/53]: 0.0028s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 18:17:38,401 - INFO - File processing [7/53]: 0.0041s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 18:17:38,419 - INFO - File processing [10/53]: 0.0204s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 18:17:38,419 - INFO - File processing [13/53]: 0.0005s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 18:17:38,430 - INFO - File processing [8/53]: 0.0320s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 18:17:38,471 - INFO - File processing [14/53]: 0.0463s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 18:17:38,503 - INFO - File processing [12/53]: 0.1036s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 18:17:38,504 - INFO - File processing [15/53]: 0.0124s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 18:17:38,505 - INFO - File processing [19/53]: 0.0010s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 18:17:38,505 - INFO - File processing [21/53]: 0.0001s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 18:17:38,509 - INFO - File processing [17/53]: 0.0054s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 18:17:38,532 - INFO - File processing [23/53]: 0.0164s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 18:17:38,536 - INFO - File processing [18/53]: 0.0322s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 18:17:38,541 - INFO - File processing [16/53]: 0.0373s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 18:17:38,547 - INFO - File processing [25/53]: 0.0065s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 18:17:38,551 - INFO - File processing [22/53]: 0.0458s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 18:17:38,628 - INFO - File processing [26/53]: 0.0469s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 18:17:38,636 - INFO - File processing [20/53]: 0.1318s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 18:17:38,707 - INFO - File processing [28/53]: 0.0502s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=137 records=63
+2025-05-31 18:17:38,682 - INFO - File processing [24/53]: 0.1461s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 18:17:38,707 - INFO - File processing [27/53]: 0.0706s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 18:17:38,708 - INFO - File processing [35/53]: 0.0003s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 18:17:38,707 - INFO - File processing [31/53]: 0.0171s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 18:17:38,707 - INFO - File processing [30/53]: 0.0174s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 18:17:38,708 - INFO - File processing [33/53]: 0.0006s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 18:17:38,680 - INFO - File processing [29/53]: 0.0002s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 18:17:38,710 - INFO - File processing [34/53]: 0.0032s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 18:17:38,721 - INFO - File processing [37/53]: 0.0133s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 18:17:38,747 - INFO - File processing [38/53]: 0.0361s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 18:17:38,748 - INFO - File processing [32/53]: 0.0416s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 18:17:38,751 - INFO - File processing [40/53]: 0.0117s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 18:17:38,763 - INFO - File processing [43/53]: 0.0001s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 18:17:38,765 - INFO - File processing [39/53]: 0.0362s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 18:17:38,765 - INFO - File processing [41/53]: 0.0180s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 18:17:38,841 - INFO - File processing [49/53]: 0.0000s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 18:17:38,780 - INFO - File processing [46/53]: 0.0005s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 18:17:38,790 - INFO - File processing [42/53]: 0.0391s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 18:17:38,840 - INFO - File processing [44/53]: 0.0693s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 18:17:38,841 - INFO - File processing [45/53]: 0.0612s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 18:17:38,774 - INFO - File processing [36/53]: 0.0660s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 18:17:38,845 - INFO - File processing [47/53]: 0.0117s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 18:17:38,845 - INFO - File processing [48/53]: 0.0042s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 18:17:38,855 - INFO - File processing [53/53]: 0.0088s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 18:17:38,865 - INFO - File processing [52/53]: 0.0192s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 18:17:38,867 - INFO - File processing [51/53]: 0.0214s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 18:17:38,876 - INFO - File processing [50/53]: 0.0348s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 18:17:38,929 - INFO - Database batch insert (highly optimized): 0.0515s record_count=4363
+2025-05-31 18:17:38,929 - INFO - File processing (parallel): 0.5350s total_lines=9379 total_records=4363 max_workers=8 file_processing_only=True
+2025-05-31 18:17:38,929 - INFO - Data sorting: 0.0000s dates=10 projects=6
+2025-05-31 18:17:38,931 - INFO - Cost DataFrame creation: 0.0015s shape=(10, 6)
+2025-05-31 18:17:38,932 - INFO - Cost DataFrame filtering: 0.0008s final_shape=(10, 6)
+2025-05-31 18:17:38,949 - INFO - Token DataFrame creation: 0.0171s shape=(10, 30)
+2025-05-31 18:17:38,949 - INFO - Total load_cost_data(): 0.5558s final_dates=10 final_projects=6 total_cost=$660.6274
+2025-05-31 18:17:38,952 - INFO - JSONL scanning and database update: 0.5586s 
+2025-05-31 18:17:38,952 - INFO - Starting load_data_from_database()
+2025-05-31 18:17:38,952 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 18:17:38,959 - INFO - Database query: 0.0070s records_count=4363
+2025-05-31 18:17:38,969 - INFO - Record processing (DB load): 0.0108s processed_records=4363
+2025-05-31 18:17:38,970 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=6
+2025-05-31 18:17:38,971 - INFO - Cost DataFrame creation (DB load): 0.0013s shape=(10, 6)
+2025-05-31 18:17:38,972 - INFO - Cost DataFrame filtering (DB load): 0.0007s final_shape=(10, 6)
+2025-05-31 18:17:38,989 - INFO - Token DataFrame creation (DB load): 0.0169s shape=(10, 30)
+2025-05-31 18:17:38,989 - INFO - Total load_data_from_database(): 0.0370s final_dates=10 final_projects=6 total_cost=$660.6274
+2025-05-31 18:17:38,989 - INFO - Database loading: 0.0373s 
+2025-05-31 18:17:38,989 - INFO - Total refresh_and_load_data(): 0.5961s 
+2025-05-31 18:17:38,989 - INFO - Data refresh in callback: 0.5961s 
+2025-05-31 18:17:38,993 - INFO - Statistics calculation: 0.0026s 
+2025-05-31 18:17:38,994 - INFO - Predictions calculation: 0.0010s 
+2025-05-31 18:17:39,084 - INFO - Chart creation: 0.0901s 
+2025-05-31 18:17:39,122 - INFO - Token chart creation: 0.0380s 
+2025-05-31 18:17:39,144 - INFO - Window analysis: 0.0216s 
+2025-05-31 18:17:39,153 - INFO - Chart JSON conversion: 0.0093s chart_count=12
+2025-05-31 18:17:39,154 - INFO - Total update_data_stores callback: 0.7609s 
+2025-05-31 18:17:56,485 - INFO - Starting main() function
+2025-05-31 18:17:56,485 - INFO - Starting create_app()
+2025-05-31 18:17:56,492 - INFO - Dash initialization: 0.0067s 
+2025-05-31 18:17:56,493 - INFO - Layout creation: 0.0010s 
+2025-05-31 18:17:56,493 - INFO - Callback registration: 0.0003s 
+2025-05-31 18:17:56,493 - INFO - Total create_app(): 0.0082s 
+2025-05-31 18:17:56,493 - INFO - Total startup time: 0.0083s 
+2025-05-31 18:17:56,493 - INFO - App startup complete, starting server
+2025-05-31 18:17:58,408 - INFO - Starting update_data_stores callback
+2025-05-31 18:17:58,408 - INFO - Starting refresh_and_load_data()
+2025-05-31 18:17:58,408 - INFO - Starting load_cost_data()
+2025-05-31 18:17:58,409 - INFO - Database initialization: 0.0008s 
+2025-05-31 18:17:58,410 - INFO - File scanning: 0.0005s files_found=53
+2025-05-31 18:17:58,410 - INFO - Timezone setup: 0.0003s 
+2025-05-31 18:17:58,412 - INFO - File processing [1/53]: 0.0014s file=27c59ced-1d84-4507-8452-3f5656ffb78c.jsonl lines=47 records=23
+2025-05-31 18:17:58,412 - INFO - File processing [2/53]: 0.0018s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 18:17:58,413 - INFO - File processing [3/53]: 0.0011s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 18:17:58,414 - INFO - File processing [4/53]: 0.0003s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 18:17:58,414 - INFO - File processing [6/53]: 0.0004s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 18:17:58,415 - INFO - File processing [5/53]: 0.0020s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 18:17:58,435 - INFO - File processing [8/53]: 0.0210s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 18:17:58,484 - INFO - File processing [9/53]: 0.0697s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 18:17:58,484 - INFO - File processing [7/53]: 0.0707s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 18:17:58,485 - INFO - File processing [11/53]: 0.0692s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 18:17:58,485 - INFO - File processing [14/53]: 0.0013s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 18:17:58,491 - INFO - File processing [13/53]: 0.0753s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 18:17:58,508 - INFO - File processing [10/53]: 0.0928s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 18:17:58,508 - INFO - File processing [15/53]: 0.0239s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 18:17:58,512 - INFO - File processing [17/53]: 0.0266s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 18:17:58,513 - INFO - File processing [19/53]: 0.0046s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 18:17:58,530 - INFO - File processing [21/53]: 0.0002s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 18:17:58,546 - INFO - File processing [16/53]: 0.0612s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 18:17:58,550 - INFO - File processing [18/53]: 0.0581s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 18:17:58,555 - INFO - File processing [23/53]: 0.0052s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 18:17:58,560 - INFO - File processing [22/53]: 0.0106s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 18:17:58,581 - INFO - File processing [12/53]: 0.1656s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 18:17:58,649 - INFO - File processing [20/53]: 0.1189s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 18:17:58,696 - INFO - File processing [26/53]: 0.0267s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 18:17:58,705 - INFO - File processing [24/53]: 0.1232s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 18:17:58,705 - INFO - File processing [25/53]: 0.0869s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 18:17:58,728 - INFO - File processing [29/53]: 0.0172s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 18:17:58,731 - INFO - File processing [28/53]: 0.0408s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=137 records=63
+2025-05-31 18:17:58,742 - INFO - File processing [30/53]: 0.0102s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 18:17:58,747 - INFO - File processing [27/53]: 0.0674s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 18:17:58,747 - INFO - File processing [31/53]: 0.0001s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 18:17:58,748 - INFO - File processing [33/53]: 0.0001s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 18:17:58,748 - INFO - File processing [37/53]: 0.0001s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 18:17:58,748 - INFO - File processing [35/53]: 0.0005s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 18:17:58,753 - INFO - File processing [34/53]: 0.0051s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 18:17:58,797 - INFO - File processing [36/53]: 0.0489s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 18:17:58,804 - INFO - File processing [38/53]: 0.0559s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 18:17:58,812 - INFO - File processing [32/53]: 0.0650s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 18:17:58,823 - INFO - File processing [39/53]: 0.0424s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 18:17:58,824 - INFO - File processing [41/53]: 0.0211s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 18:17:58,827 - INFO - File processing [40/53]: 0.0298s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 18:17:58,827 - INFO - File processing [43/53]: 0.0145s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 18:17:58,836 - INFO - File processing [44/53]: 0.0234s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 18:17:58,850 - INFO - File processing [47/53]: 0.0176s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 18:17:58,852 - INFO - File processing [42/53]: 0.0494s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 18:17:58,859 - INFO - File processing [45/53]: 0.0316s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 18:17:58,860 - INFO - File processing [48/53]: 0.0074s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 18:17:58,860 - INFO - File processing [46/53]: 0.0278s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 18:17:58,861 - INFO - File processing [49/53]: 0.0002s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 18:17:58,873 - INFO - File processing [51/53]: 0.0126s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 18:17:58,877 - INFO - File processing [50/53]: 0.0168s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 18:17:58,882 - INFO - File processing [52/53]: 0.0161s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 18:17:58,886 - INFO - File processing [53/53]: 0.0123s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 18:17:58,920 - INFO - Database batch insert (highly optimized): 0.0313s record_count=4363
+2025-05-31 18:17:58,920 - INFO - File processing (parallel): 0.5096s total_lines=9379 total_records=4363 max_workers=8 file_processing_only=True
+2025-05-31 18:17:58,920 - INFO - Data sorting: 0.0000s dates=10 projects=6
+2025-05-31 18:17:58,922 - INFO - Cost DataFrame creation: 0.0020s shape=(10, 6)
+2025-05-31 18:17:58,923 - INFO - Cost DataFrame filtering: 0.0011s final_shape=(10, 6)
+2025-05-31 18:17:58,940 - INFO - Token DataFrame creation: 0.0175s shape=(10, 30)
+2025-05-31 18:17:58,941 - INFO - Total load_cost_data(): 0.5321s final_dates=10 final_projects=6 total_cost=$660.6274
+2025-05-31 18:17:58,941 - INFO - JSONL scanning and database update: 0.5328s 
+2025-05-31 18:17:58,941 - INFO - Starting load_data_from_database()
+2025-05-31 18:17:58,941 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 18:17:58,948 - INFO - Database query: 0.0071s records_count=4363
+2025-05-31 18:17:58,959 - INFO - Record processing (DB load): 0.0105s processed_records=4363
+2025-05-31 18:17:58,959 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=6
+2025-05-31 18:17:58,960 - INFO - Cost DataFrame creation (DB load): 0.0014s shape=(10, 6)
+2025-05-31 18:17:58,961 - INFO - Cost DataFrame filtering (DB load): 0.0007s final_shape=(10, 6)
+2025-05-31 18:17:58,978 - INFO - Token DataFrame creation (DB load): 0.0170s shape=(10, 30)
+2025-05-31 18:17:58,978 - INFO - Total load_data_from_database(): 0.0371s final_dates=10 final_projects=6 total_cost=$660.6274
+2025-05-31 18:17:58,979 - INFO - Database loading: 0.0374s 
+2025-05-31 18:17:58,979 - INFO - Total refresh_and_load_data(): 0.5703s 
+2025-05-31 18:17:58,979 - INFO - Data refresh in callback: 0.5703s 
+2025-05-31 18:17:58,983 - INFO - Statistics calculation: 0.0030s 
+2025-05-31 18:17:58,985 - INFO - Predictions calculation: 0.0012s 
+2025-05-31 18:17:59,274 - INFO - Chart creation: 0.2893s 
+2025-05-31 18:17:59,312 - INFO - Token chart creation: 0.0379s 
+2025-05-31 18:17:59,329 - INFO - Window analysis: 0.0167s 
+2025-05-31 18:17:59,338 - INFO - Chart JSON conversion: 0.0090s chart_count=12
+2025-05-31 18:17:59,338 - INFO - Total update_data_stores callback: 0.9301s 
+2025-05-31 18:36:55,326 - INFO - Starting main() function
+2025-05-31 18:36:55,327 - INFO - Starting create_app()
+2025-05-31 18:36:55,333 - INFO - Dash initialization: 0.0066s 
+2025-05-31 18:36:55,334 - INFO - Layout creation: 0.0011s 
+2025-05-31 18:36:55,335 - INFO - Callback registration: 0.0003s 
+2025-05-31 18:36:55,335 - INFO - Total create_app(): 0.0081s 
+2025-05-31 18:36:55,335 - INFO - Total startup time: 0.0084s 
+2025-05-31 18:36:55,335 - INFO - App startup complete, starting server
+2025-05-31 18:36:58,049 - INFO - Starting update_data_stores callback
+2025-05-31 18:36:58,049 - INFO - Starting refresh_and_load_data()
+2025-05-31 18:36:58,049 - INFO - Starting load_cost_data()
+2025-05-31 18:36:58,049 - INFO - Database initialization: 0.0005s 
+2025-05-31 18:36:58,050 - INFO - File scanning: 0.0003s files_found=54
+2025-05-31 18:36:58,050 - INFO - Timezone setup: 0.0002s 
+2025-05-31 18:36:58,051 - INFO - File processing [2/54]: 0.0005s file=6b726950-0430-4047-9ba1-0e20b4bf2c68.jsonl lines=15 records=7
+2025-05-31 18:36:58,053 - INFO - File processing [1/54]: 0.0032s file=27c59ced-1d84-4507-8452-3f5656ffb78c.jsonl lines=112 records=56
+2025-05-31 18:36:58,054 - INFO - File processing [3/54]: 0.0027s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 18:36:58,055 - INFO - File processing [6/54]: 0.0006s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 18:36:58,055 - INFO - File processing [4/54]: 0.0039s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 18:36:58,056 - INFO - File processing [5/54]: 0.0044s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 18:36:58,056 - INFO - File processing [8/54]: 0.0021s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 18:36:58,056 - INFO - File processing [7/54]: 0.0025s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 18:36:58,057 - INFO - File processing [12/54]: 0.0004s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 18:36:58,058 - INFO - File processing [10/54]: 0.0018s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 18:36:58,083 - INFO - File processing [9/54]: 0.0288s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 18:36:58,085 - INFO - File processing [16/54]: 0.0012s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 18:36:58,085 - INFO - File processing [11/54]: 0.0289s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 18:36:58,085 - INFO - File processing [15/54]: 0.0028s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 18:36:58,087 - INFO - File processing [20/54]: 0.0014s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 18:36:58,087 - INFO - File processing [22/54]: 0.0013s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 18:36:58,091 - INFO - File processing [18/54]: 0.0062s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 18:36:58,096 - INFO - File processing [23/54]: 0.0092s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 18:36:58,111 - INFO - File processing [14/54]: 0.0442s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 18:36:58,111 - INFO - File processing [24/54]: 0.0241s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 18:36:58,169 - INFO - File processing [17/54]: 0.0840s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 18:36:58,257 - INFO - File processing [27/54]: 0.0774s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 18:36:58,300 - INFO - File processing [19/54]: 0.2148s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 18:36:58,343 - INFO - File processing [26/54]: 0.2474s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 18:36:58,344 - INFO - File processing [29/54]: 0.0535s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=151 records=70
+2025-05-31 18:36:58,360 - INFO - File processing [13/54]: 0.3023s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 18:36:58,360 - INFO - File processing [30/54]: 0.0328s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 18:36:58,361 - INFO - File processing [31/54]: 0.0176s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 18:36:58,396 - INFO - File processing [34/54]: 0.0002s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 18:36:58,385 - INFO - File processing [28/54]: 0.1279s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 18:36:58,395 - INFO - File processing [25/54]: 0.3039s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 18:36:58,385 - INFO - File processing [21/54]: 0.3001s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 18:36:58,396 - INFO - File processing [36/54]: 0.0003s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 18:36:58,396 - INFO - File processing [32/54]: 0.0203s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 18:36:58,397 - INFO - File processing [38/54]: 0.0005s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 18:36:58,402 - INFO - File processing [35/54]: 0.0059s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 18:36:58,402 - INFO - File processing [44/54]: 0.0000s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 18:36:58,402 - INFO - File processing [42/54]: 0.0049s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 18:36:58,405 - INFO - File processing [41/54]: 0.0080s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 18:36:58,461 - INFO - File processing [43/54]: 0.0636s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 18:36:58,461 - INFO - File processing [45/54]: 0.0593s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 18:36:58,501 - INFO - File processing [37/54]: 0.1053s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 18:36:58,505 - INFO - File processing [47/54]: 0.0998s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 18:36:58,505 - INFO - File processing [33/54]: 0.1096s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 18:36:58,506 - INFO - File processing [46/54]: 0.1042s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 18:36:58,511 - INFO - File processing [39/54]: 0.1150s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 18:36:58,517 - INFO - File processing [48/54]: 0.0560s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 18:36:58,522 - INFO - File processing [50/54]: 0.0208s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 18:36:58,522 - INFO - File processing [40/54]: 0.1257s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 18:36:58,522 - INFO - File processing [49/54]: 0.0492s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 18:36:58,523 - INFO - File processing [51/54]: 0.0179s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 18:36:58,523 - INFO - File processing [52/54]: 0.0173s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 18:36:58,528 - INFO - File processing [53/54]: 0.0222s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 18:36:58,532 - INFO - File processing [54/54]: 0.0112s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 18:36:58,587 - INFO - Database batch insert (highly optimized): 0.0536s record_count=4410
+2025-05-31 18:36:58,587 - INFO - File processing (parallel): 0.5372s total_lines=9473 total_records=4410 max_workers=8 file_processing_only=True
+2025-05-31 18:36:58,587 - INFO - Data sorting: 0.0000s dates=10 projects=7
+2025-05-31 18:36:58,590 - INFO - Cost DataFrame creation: 0.0024s shape=(10, 7)
+2025-05-31 18:36:58,591 - INFO - Cost DataFrame filtering: 0.0013s final_shape=(10, 7)
+2025-05-31 18:36:58,614 - INFO - Token DataFrame creation: 0.0227s shape=(10, 35)
+2025-05-31 18:36:58,614 - INFO - Total load_cost_data(): 0.5649s final_dates=10 final_projects=7 total_cost=$670.5637
+2025-05-31 18:36:58,616 - INFO - JSONL scanning and database update: 0.5673s 
+2025-05-31 18:36:58,616 - INFO - Starting load_data_from_database()
+2025-05-31 18:36:58,616 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 18:36:58,624 - INFO - Database query: 0.0076s records_count=4410
+2025-05-31 18:36:58,636 - INFO - Record processing (DB load): 0.0122s processed_records=4410
+2025-05-31 18:36:58,636 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=7
+2025-05-31 18:36:58,638 - INFO - Cost DataFrame creation (DB load): 0.0016s shape=(10, 7)
+2025-05-31 18:36:58,639 - INFO - Cost DataFrame filtering (DB load): 0.0008s final_shape=(10, 7)
+2025-05-31 18:36:58,660 - INFO - Token DataFrame creation (DB load): 0.0209s shape=(10, 35)
+2025-05-31 18:36:58,660 - INFO - Total load_data_from_database(): 0.0434s final_dates=10 final_projects=7 total_cost=$670.5637
+2025-05-31 18:36:58,660 - INFO - Database loading: 0.0438s 
+2025-05-31 18:36:58,660 - INFO - Total refresh_and_load_data(): 0.6112s 
+2025-05-31 18:36:58,660 - INFO - Data refresh in callback: 0.6112s 
+2025-05-31 18:36:58,666 - INFO - Statistics calculation: 0.0029s 
+2025-05-31 18:36:58,667 - INFO - Predictions calculation: 0.0011s 
+2025-05-31 18:36:59,030 - INFO - Chart creation: 0.3629s 
+2025-05-31 18:36:59,075 - INFO - Token chart creation: 0.0444s 
+2025-05-31 18:36:59,133 - INFO - Window analysis: 0.0575s 
+2025-05-31 18:36:59,142 - INFO - Chart JSON conversion: 0.0093s chart_count=12
+2025-05-31 18:36:59,142 - INFO - Total update_data_stores callback: 1.0934s 
+2025-05-31 18:50:25,215 - INFO - Starting main() function
+2025-05-31 18:50:25,217 - INFO - Starting create_app()
+2025-05-31 18:50:25,227 - INFO - Dash initialization: 0.0106s 
+2025-05-31 18:50:25,229 - INFO - Layout creation: 0.0013s 
+2025-05-31 18:50:25,229 - INFO - Callback registration: 0.0003s 
+2025-05-31 18:50:25,229 - INFO - Total create_app(): 0.0125s 
+2025-05-31 18:50:25,229 - INFO - Total startup time: 0.0140s 
+2025-05-31 18:50:25,229 - INFO - App startup complete, starting server
+2025-05-31 18:50:28,632 - INFO - Starting update_data_stores callback
+2025-05-31 18:50:28,632 - INFO - Starting refresh_and_load_data()
+2025-05-31 18:50:28,632 - INFO - Starting load_cost_data()
+2025-05-31 18:50:28,633 - INFO - Database initialization: 0.0007s 
+2025-05-31 18:50:28,634 - INFO - File scanning: 0.0012s files_found=54
+2025-05-31 18:50:28,634 - INFO - Timezone setup: 0.0003s 
+2025-05-31 18:50:28,641 - INFO - File processing [1/54]: 0.0067s file=27c59ced-1d84-4507-8452-3f5656ffb78c.jsonl lines=171 records=85
+2025-05-31 18:50:28,642 - INFO - File processing [4/54]: 0.0009s file=e82a4479-a543-42ad-926d-5f830157eaa2.jsonl lines=36 records=14
+2025-05-31 18:50:28,643 - INFO - File processing [7/54]: 0.0002s file=9ea96d4c-1d72-4f99-95d8-9751f392a744.jsonl lines=9 records=4
+2025-05-31 18:50:28,646 - INFO - File processing [2/54]: 0.0117s file=6b726950-0430-4047-9ba1-0e20b4bf2c68.jsonl lines=87 records=43
+2025-05-31 18:50:28,647 - INFO - File processing [3/54]: 0.0059s file=8decf8f9-f508-41ce-a1d6-36ead74b6e3e.jsonl lines=16 records=5
+2025-05-31 18:50:28,647 - INFO - File processing [8/54]: 0.0049s file=beff0b22-0082-44c7-8fbc-643bf11c22ce.jsonl lines=18 records=7
+2025-05-31 18:50:28,668 - INFO - File processing [9/54]: 0.0250s file=119360e8-3dad-445f-8602-b238491944ab.jsonl lines=97 records=48
+2025-05-31 18:50:28,668 - INFO - File processing [5/54]: 0.0265s file=8e46ad42-a4e2-4b07-aa84-c2e05dfba955.jsonl lines=7 records=3
+2025-05-31 18:50:28,670 - INFO - File processing [6/54]: 0.0279s file=30116e31-e953-4a17-bcb3-ed02c70999ba.jsonl lines=35 records=16
+2025-05-31 18:50:28,670 - INFO - File processing [10/54]: 0.0228s file=c4233510-a541-4905-81d5-485b900d6a07.jsonl lines=27 records=12
+2025-05-31 18:50:28,680 - INFO - File processing [11/54]: 0.0237s file=b90e1c33-e6cb-451e-8d52-2325c60fbdc0.jsonl lines=253 records=124
+2025-05-31 18:50:28,730 - INFO - File processing [12/54]: 0.0619s file=5917e83b-514b-4ac5-bbad-fba905b7d00b.jsonl lines=2 records=0
+2025-05-31 18:50:28,732 - INFO - File processing [14/54]: 0.0613s file=27d6ceb9-4407-4431-b055-62d2a8fbf431.jsonl lines=9 records=3
+2025-05-31 18:50:28,732 - INFO - File processing [15/54]: 0.0561s file=4da03439-8a1b-4878-8cbd-b44ed6891b18.jsonl lines=3 records=0
+2025-05-31 18:50:28,732 - INFO - File processing [16/54]: 0.0021s file=cc6cd09e-90bb-4011-be0a-16d0e16346f6.jsonl lines=3 records=0
+2025-05-31 18:50:28,767 - INFO - File processing [18/54]: 0.0350s file=61e80ff2-651b-41b4-b280-fee76919bb13.jsonl lines=108 records=46
+2025-05-31 18:50:28,777 - INFO - File processing [17/54]: 0.0464s file=7501d28d-0e2d-4f00-aed2-1f0defca79aa.jsonl lines=111 records=49
+2025-05-31 18:50:28,802 - INFO - File processing [20/54]: 0.0349s file=0d68c9fb-0647-4b4d-9ab5-3fdf1d7a25b3.jsonl lines=59 records=16
+2025-05-31 18:50:28,810 - INFO - File processing [13/54]: 0.1398s file=d22affc2-a249-46e0-84f7-aa297376f62c.jsonl lines=1174 records=552
+2025-05-31 18:50:28,812 - INFO - File processing [19/54]: 0.0508s file=b5bdfee8-2c84-4899-b29d-7d487016904f.jsonl lines=188 records=87
+2025-05-31 18:50:28,812 - INFO - File processing [22/54]: 0.0169s file=524b06dd-72ed-43c9-9fe5-b84596a02a0a.jsonl lines=5 records=0
+2025-05-31 18:50:28,850 - INFO - File processing [23/54]: 0.0384s file=17ac8bce-28fc-4c9b-95b9-118aa3838ee8.jsonl lines=151 records=75
+2025-05-31 18:50:28,858 - INFO - File processing [21/54]: 0.0804s file=00b1a58e-3459-4928-9fc6-1c6eb5075fec.jsonl lines=411 records=191
+2025-05-31 18:50:28,858 - INFO - File processing [26/54]: 0.0073s file=037a45da-0d03-4647-a768-3f301b0d882e.jsonl lines=6 records=1
+2025-05-31 18:50:28,858 - INFO - File processing [24/54]: 0.0168s file=99061780-b077-41ee-98aa-39d89f1b4ba1.jsonl lines=1 records=0
+2025-05-31 18:50:28,859 - INFO - File processing [27/54]: 0.0079s file=ae15e568-1087-4689-84af-e749fdcac995.jsonl lines=4 records=0
+2025-05-31 18:50:28,859 - INFO - File processing [30/54]: 0.0008s file=81bb937a-b7d0-4b01-b034-d643d5adc97d.jsonl lines=11 records=3
+2025-05-31 18:50:28,860 - INFO - File processing [32/54]: 0.0013s file=f4d9a57d-60d8-40f2-b186-19304ea3052f.jsonl lines=12 records=0
+2025-05-31 18:50:28,860 - INFO - File processing [34/54]: 0.0015s file=e69a3176-1ded-4614-947c-43a427e547e2.jsonl lines=8 records=0
+2025-05-31 18:50:28,862 - INFO - File processing [36/54]: 0.0020s file=121e92a7-23eb-4b58-b811-a2876827514d.jsonl lines=6 records=0
+2025-05-31 18:50:28,870 - INFO - File processing [35/54]: 0.0110s file=e6323fb8-8bf3-4e9a-8116-43a4e98237a8.jsonl lines=40 records=19
+2025-05-31 18:50:28,870 - INFO - File processing [38/54]: 0.0087s file=b8c9efa7-764f-4707-9b96-df97d118b8c7.jsonl lines=8 records=3
+2025-05-31 18:50:28,879 - INFO - File processing [31/54]: 0.0204s file=a94bba21-f3d0-4096-9c84-a7cb3a9269b6.jsonl lines=45 records=20
+2025-05-31 18:50:28,885 - INFO - File processing [29/54]: 0.0268s file=9b561979-8354-4154-a9bf-67312bad0bbb.jsonl lines=183 records=85
+2025-05-31 18:50:28,992 - INFO - File processing [33/54]: 0.1337s file=b02d6647-67b6-403a-bc3e-911263ab5518.jsonl lines=217 records=106
+2025-05-31 18:50:28,995 - INFO - File processing [41/54]: 0.1165s file=d4f946b2-ee91-4f28-bf9d-1f19b0e04292.jsonl lines=219 records=106
+2025-05-31 18:50:28,998 - INFO - File processing [40/54]: 0.1270s file=cc9d5b1a-0397-4a3d-bc4d-ccd91b6755d1.jsonl lines=329 records=152
+2025-05-31 18:50:29,001 - INFO - File processing [28/54]: 0.1435s file=7f3c18a9-d308-494e-aabb-2f8abbc4e5f7.jsonl lines=560 records=272
+2025-05-31 18:50:29,003 - INFO - File processing [37/54]: 0.1426s file=52cf791a-3019-40c0-b475-a5ce16fcb206.jsonl lines=205 records=100
+2025-05-31 18:50:29,028 - INFO - File processing [39/54]: 0.1576s file=e03ede18-cbd3-4375-a82a-0202e6b5d08a.jsonl lines=343 records=149
+2025-05-31 18:50:29,034 - INFO - File processing [42/54]: 0.0327s file=43736ace-711b-40d3-a473-cd5bf42fb930.jsonl lines=1 records=0
+2025-05-31 18:50:29,137 - INFO - File processing [45/54]: 0.0430s file=44061330-1e80-4018-8243-ff90351e9e7e.jsonl lines=502 records=242
+2025-05-31 18:50:29,149 - INFO - File processing [43/54]: 0.0865s file=7be5e5c2-b4c0-4570-8ec4-41ff5ef6c4ce.jsonl lines=453 records=222
+2025-05-31 18:50:29,155 - INFO - File processing [47/54]: 0.0340s file=d8431a2b-c3b0-4bdb-836c-644939e9fba0.jsonl lines=57 records=14
+2025-05-31 18:50:29,163 - INFO - File processing [46/54]: 0.0581s file=32e270f3-3f32-46ec-a1c5-bf3bd1e89d0b.jsonl lines=616 records=278
+2025-05-31 18:50:29,164 - INFO - File processing [49/54]: 0.0085s file=9f5b2aef-0e10-49c5-bccb-354746e44620.jsonl lines=31 records=14
+2025-05-31 18:50:29,164 - INFO - File processing [44/54]: 0.1019s file=9dc64eea-8afb-4e91-baf5-4d5eb2590f21.jsonl lines=2 records=0
+2025-05-31 18:50:29,173 - INFO - File processing [25/54]: 0.3230s file=3d75bede-14bc-4ca8-a4c7-8aa172c6890f.jsonl lines=912 records=433
+2025-05-31 18:50:29,177 - INFO - File processing [48/54]: 0.0283s file=770c7567-f440-4ed9-88ed-d9826bf31bd1.jsonl lines=168 records=80
+2025-05-31 18:50:29,178 - INFO - File processing [50/54]: 0.0147s file=88fe4a08-933a-43ea-8ae9-f0546cc87880.jsonl lines=1 records=0
+2025-05-31 18:50:29,187 - INFO - File processing [54/54]: 0.0090s file=e7ebae82-d0f6-4daf-a055-a8002f86963f.jsonl lines=230 records=109
+2025-05-31 18:50:29,197 - INFO - File processing [53/54]: 0.0191s file=7d3e08cc-3110-46bd-9223-a876cf5faeb7.jsonl lines=357 records=164
+2025-05-31 18:50:29,210 - INFO - File processing [52/54]: 0.0328s file=316beb16-a79a-4339-9ed7-0305c2fbadc6.jsonl lines=491 records=227
+2025-05-31 18:50:29,211 - INFO - File processing [51/54]: 0.0336s file=b39f783b-e24d-410f-912d-96304466493b.jsonl lines=638 records=311
+2025-05-31 18:50:29,253 - INFO - Database batch insert (highly optimized): 0.0403s record_count=4490
+2025-05-31 18:50:29,253 - INFO - File processing (parallel): 0.6189s total_lines=9636 total_records=4490 max_workers=8 file_processing_only=True
+2025-05-31 18:50:29,253 - INFO - Data sorting: 0.0000s dates=10 projects=7
+2025-05-31 18:50:29,258 - INFO - Cost DataFrame creation: 0.0050s shape=(10, 7)
+2025-05-31 18:50:29,260 - INFO - Cost DataFrame filtering: 0.0018s final_shape=(10, 7)
+2025-05-31 18:50:29,286 - INFO - Token DataFrame creation: 0.0258s shape=(10, 35)
+2025-05-31 18:50:29,286 - INFO - Total load_cost_data(): 0.6544s final_dates=10 final_projects=7 total_cost=$688.4366
+2025-05-31 18:50:29,291 - INFO - JSONL scanning and database update: 0.6589s 
+2025-05-31 18:50:29,291 - INFO - Starting load_data_from_database()
+2025-05-31 18:50:29,291 - INFO - Timezone setup (DB load): 0.0000s 
+2025-05-31 18:50:29,300 - INFO - Database query: 0.0090s records_count=4490
+2025-05-31 18:50:29,313 - INFO - Record processing (DB load): 0.0121s processed_records=4490
+2025-05-31 18:50:29,313 - INFO - Data sorting (DB load): 0.0000s dates=10 projects=7
+2025-05-31 18:50:29,315 - INFO - Cost DataFrame creation (DB load): 0.0023s shape=(10, 7)
+2025-05-31 18:50:29,317 - INFO - Cost DataFrame filtering (DB load): 0.0013s final_shape=(10, 7)
+2025-05-31 18:50:29,339 - INFO - Token DataFrame creation (DB load): 0.0224s shape=(10, 35)
+2025-05-31 18:50:29,339 - INFO - Total load_data_from_database(): 0.0480s final_dates=10 final_projects=7 total_cost=$688.4366
+2025-05-31 18:50:29,340 - INFO - Database loading: 0.0485s 
+2025-05-31 18:50:29,340 - INFO - Total refresh_and_load_data(): 0.7077s 
+2025-05-31 18:50:29,340 - INFO - Data refresh in callback: 0.7077s 
+2025-05-31 18:50:29,349 - INFO - Statistics calculation: 0.0051s 
+2025-05-31 18:50:29,351 - INFO - Predictions calculation: 0.0020s 
+2025-05-31 18:50:29,776 - INFO - Chart creation: 0.4248s 
+2025-05-31 18:50:29,830 - INFO - Token chart creation: 0.0543s 
+2025-05-31 18:50:29,851 - INFO - Window analysis: 0.0203s 
+2025-05-31 18:50:29,861 - INFO - Chart JSON conversion: 0.0098s chart_count=12
+2025-05-31 18:50:29,861 - INFO - Total update_data_stores callback: 1.2295s 

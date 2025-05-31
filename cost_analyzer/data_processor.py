@@ -363,8 +363,7 @@ def load_cost_data() -> Tuple[pd.DataFrame, List[str], float, pd.DataFrame]:
         for project in projects:
             df.loc[date, project] = data[date].get(project, 0)
     
-    df = df.fillna(0)
-    df = df.infer_objects(copy=False)
+    df = df.fillna(0).infer_objects(copy=False)
     log_timing("Cost DataFrame creation", start_cost_df, shape=df.shape)
     
     # Filter out days with zero cost
@@ -383,8 +382,7 @@ def load_cost_data() -> Tuple[pd.DataFrame, List[str], float, pd.DataFrame]:
                 col_name = f"{project}_{token_type}"
                 token_df.loc[date, col_name] = token_data[date][project][token_type]
     
-    token_df = token_df.fillna(0)
-    token_df = token_df.infer_objects(copy=False)
+    token_df = token_df.fillna(0).infer_objects(copy=False)
     
     # Filter token_df to match cost df dates
     if len(df) > 0:
@@ -510,8 +508,7 @@ def load_data_from_database() -> Tuple[pd.DataFrame, List[str], float, pd.DataFr
         for project in projects:
             df.loc[date, project] = data[date].get(project, 0)
     
-    df = df.fillna(0)
-    df = df.infer_objects(copy=False)
+    df = df.fillna(0).infer_objects(copy=False)
     log_timing("Cost DataFrame creation (DB load)", start_cost_df, shape=df.shape)
     
     # Filter out days with zero cost
@@ -530,8 +527,7 @@ def load_data_from_database() -> Tuple[pd.DataFrame, List[str], float, pd.DataFr
                 col_name = f"{project}_{token_type}"
                 token_df.loc[date, col_name] = token_data[date][project][token_type]
     
-    token_df = token_df.fillna(0)
-    token_df = token_df.infer_objects(copy=False)
+    token_df = token_df.fillna(0).infer_objects(copy=False)
     
     # Filter token_df to match cost df dates
     if len(df) > 0:
@@ -581,8 +577,11 @@ def load_raw_records_from_database() -> List[Dict[str, Any]]:
     return raw_records
 
 
-def get_window_analysis() -> Dict[str, Any]:
+def get_window_analysis(min_window_cost: float = 10.0) -> Dict[str, Any]:
     """Get credit window analysis.
+    
+    Args:
+        min_window_cost: Minimum cost threshold for including windows in statistics
     
     Returns:
         Dictionary containing window analysis data
@@ -616,7 +615,7 @@ def get_window_analysis() -> Dict[str, Any]:
         save_all_windows(window_dicts)
         
         # Use the newly detected windows
-        analysis = analyze_windows(windows)
+        analysis = analyze_windows(windows, min_window_cost)
         analysis['windows'] = window_dicts
     else:
         # Use saved windows
@@ -629,15 +628,22 @@ def get_window_analysis() -> Dict[str, Any]:
             window.total_cost = w_dict['total_cost']
             window.opus_cost = w_dict['opus_cost']
             window.sonnet_cost = w_dict['sonnet_cost']
+            window.total_tokens = w_dict.get('total_tokens', 0)
+            window.opus_tokens = w_dict.get('opus_tokens', 0)
+            window.sonnet_tokens = w_dict.get('sonnet_tokens', 0)
             window.reached_half_credit = w_dict['reached_half_credit']
             window.half_credit_time = datetime.fromisoformat(w_dict['half_credit_time']) if w_dict.get('half_credit_time') else None
             window.half_credit_cost = w_dict.get('half_credit_cost')
             window.messages = w_dict.get('messages', [])
+            # Convert message timestamps to datetime objects
+            for msg in window.messages:
+                if isinstance(msg.get('timestamp'), str):
+                    msg['timestamp'] = datetime.fromisoformat(msg['timestamp'].replace('Z', '+00:00'))
             window.opus_messages = [m for m in window.messages if m.get('model') and 'opus' in m['model'].lower()]
             window.sonnet_messages = [m for m in window.messages if m.get('model') and 'sonnet' in m['model'].lower()]
             windows.append(window)
         
-        analysis = analyze_windows(windows)
+        analysis = analyze_windows(windows, min_window_cost)
         analysis['windows'] = saved_windows
     
     return analysis

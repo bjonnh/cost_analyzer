@@ -1459,10 +1459,13 @@ def create_current_window_gauge(windows_data: Dict[str, Any]) -> go.Figure:
     fig = go.Figure(go.Indicator(
         mode="gauge+number+delta",
         value=current_window.get('total_cost', 0),
-        title={'text': f"Current Window ({progress_pct:.0f}% complete)"},
-        delta={'reference': 50, 'increasing': {'color': "red"}},
+        title={'text': f"Current Window Cost ({progress_pct:.0f}% time elapsed)"},
+        number={'suffix': " USD", 'valueformat': '.2f'},
+        delta={'reference': 50, 'increasing': {'color': "red"}, 'valueformat': '.2f'},
         gauge={
-            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
+            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue", 
+                    'tickmode': 'array', 'tickvals': [0, 25, 50, 75, 100], 
+                    'ticktext': ['$0', '$25', '$50', '$75', '$100']},
             'bar': {'color': "darkblue"},
             'bgcolor': "white",
             'borderwidth': 2,
@@ -1484,9 +1487,18 @@ def create_current_window_gauge(windows_data: Dict[str, Any]) -> go.Figure:
     fig.add_annotation(
         text=f"Started: {current_window['start_time'].strftime('%H:%M')}",
         xref="paper", yref="paper",
-        x=0.5, y=-0.2,
+        x=0.5, y=-0.15,
         showarrow=False,
         font=dict(size=12)
+    )
+    
+    # Add explanation for delta
+    fig.add_annotation(
+        text="Delta shows difference from $50 reference",
+        xref="paper", yref="paper",
+        x=0.5, y=-0.25,
+        showarrow=False,
+        font=dict(size=10, color="gray")
     )
     
     if current_window.get('reached_half_credit', False):
@@ -1500,7 +1512,7 @@ def create_current_window_gauge(windows_data: Dict[str, Any]) -> go.Figure:
             fig.add_annotation(
                 text=f"Half credit reached at {half_credit_time.strftime('%H:%M')}",
                 xref="paper", yref="paper",
-                x=0.5, y=-0.3,
+                x=0.5, y=-0.35,
                 showarrow=False,
                 font=dict(size=12, color="orange")
             )
